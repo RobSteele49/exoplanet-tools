@@ -157,7 +157,7 @@ for file in os.listdir('xml_files'):
         try:
             tmpX = star.findall('.//planet')
         except:
-            print ('star.finalall raised an exception.')
+            print ('star.findall raised an exception.')
             print ('file name: ', file)
             
         for planet in star.findall('.//planet'):
