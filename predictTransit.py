@@ -71,7 +71,7 @@ endTime   = Time(datetime.now()+timedelta(4), scale='utc')
 # Overwritting the start and end times with hard wired number is done
 # below. This logic can be commented out when unnecessary.
 
-startTime = Time(datetime(2022,12,14,0,0,0), scale='utc')
+startTime = Time(datetime(2022,12,18,0,0,0), scale='utc')
 endTime   = Time(datetime(2022,12,23,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
@@ -128,18 +128,20 @@ for file in os.listdir('xml_files'):
 
 # Check for HAT-P-1 as that one is a good one to check the rest of the logic.
 
-                if root.findtext('name') == 'HAT-P-1':
-                    print ('Did find HAT-P-1')
-                    print ('Period              : ', planet.findtext('period'))
-                    transitTimeBJD = float(planet.findtext('transittime'))
-                    print ('Transit Time BJD    : ', transitTimeBJD)
-                    transitTime = Time(transitTimeBJD,
-                                       format = 'jd',
-                                       scale  = 'utc')
-                    transitTime = transitTime - (1.0/24.0*8.0)
-                    print ('Transit Time        : ',
-                           transitTime.fits)
-                    
+# Debugging
+#                if root.findtext('name') == 'HAT-P-1':
+#                    print ('Did find HAT-P-1')
+#                    print ('Period              : ', planet.findtext('period'))
+#                    transitTimeBJD = float(planet.findtext('transittime'))
+#                    print ('Transit Time BJD    : ', transitTimeBJD)
+#                    transitTime = Time(transitTimeBJD,
+#                                       format = 'jd',
+#                                       scale  = 'utc')
+#                    transitTime = transitTime - (1.0/24.0*8.0)
+#                    print ('Transit Time        : ',
+#                           transitTime.fits)
+# Debugging
+
 # Get the magntiude of the star. Use the visual magnitude if it is available.
 # If not, use the 'B' magnitude and if that isn't available use the
 # 'J' magnitude. If none of these are avaiable use 20.0 as the magnitude.
@@ -182,8 +184,8 @@ for file in os.listdir('xml_files'):
 # Need to pick out just one for the code.
 
 # Debugging:
-                        if root.findtext('name') == 'HAT-P-1':
-                            print ('planetPeriod        : ', planetPeriod)
+#                        if root.findtext('name') == 'HAT-P-1':
+#                            print ('planetPeriod        : ', planetPeriod)
 # Debugging:
 
                         transitTimeBJD = float(
@@ -201,8 +203,8 @@ for file in os.listdir('xml_files'):
                         revolutionCount = delta / planetPeriod
 
 # Debugging:
-                        if root.findtext('name') == 'HAT-P-1':
-                            print ('revolutionCount     : ', revolutionCount)
+#                        if root.findtext('name') == 'HAT-P-1':
+#                            print ('revolutionCount     : ', revolutionCount)
 # Debugging:
                         
                         intRevolutionCount = int(revolutionCount) + 1
@@ -230,10 +232,10 @@ for file in os.listdir('xml_files'):
                                        format='jd',
                                        scale='utc')
 # Debugging:
-                        if root.findtext('name') == 'HAT-P-1':
-                            print ('nextTransitTime     : ', nextTransitTime)
-                            print ('daysToTransit       : ', daysToTransit)
-                            print ('nTTPT               : ', nTTPT.fits)
+#                        if root.findtext('name') == 'HAT-P-1':
+#                            print ('nextTransitTime     : ', nextTransitTime)
+#                            print ('daysToTransit       : ', daysToTransit)
+#                            print ('nTTPT               : ', nTTPT.fits)
 # Debugging:
 
                         starRadius   = star.findtext('radius')
@@ -335,15 +337,15 @@ for file in os.listdir('xml_files'):
                             night = True
 
 # Debugging
-                        night = True
-                        minAltCutoff = -90
+#                        night = True
+#                        minAltCutoff = -90
 # Debugging
 
 # Debugging:
-                        if root.findtext('name') == 'HAT-P-1':
-                            print ('d                   : ', d)
-                            print ('planetStarAreaRatio : ', planetStarAreaRatio)
-                            print ('altitude            : ', altAzi.alt.degree)
+#                        if root.findtext('name') == 'HAT-P-1':
+#                            print ('d                   : ', d)
+#                            print ('planetStarAreaRatio : ', planetStarAreaRatio)
+#                            print ('altitude            : ', altAzi.alt.degree)
 # Debugging:
 
                         if (float(mag) < float(minMagCutoff))                     and \
