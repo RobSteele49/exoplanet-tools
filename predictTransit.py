@@ -56,12 +56,12 @@ count = 0
 dateTime = datetime.today()
 nowPT    = Time (dateTime, scale='utc')
 
-print ('nowPT: ', nowPT, 'PT')
+print ('nowPT        : ', nowPT, 'PT')
 
 dateTimeUTC = datetime.utcnow()
 nowUTC      = Time (dateTimeUTC, scale='utc')
 
-print ('nowUTC : ', nowUTC, 'UTC')
+print ('nowUTC       : ', nowUTC, 'UTC')
 
 # This will search for 4 days (timedelta(4))
 
@@ -74,11 +74,11 @@ endTime   = Time(datetime.now()+timedelta(4), scale='utc')
 startTime = Time(datetime(2022,12,14,0,0,0), scale='utc')
 endTime   = Time(datetime(2022,12,23,0,0,0), scale='utc')
 
-print ('startTime: ', startTime)
-print ('endTime  : ', endTime)
+print ('startTime    : ', startTime)
+print ('endTime      : ', endTime)
 
 observingMorningTime = '04'
-observingEveningTime = '04' # was 16
+observingEveningTime = '16'
 
 print ('Hardwire minMagCutoff, minAltCutoff, and minPlanetStarAreaRatio to 10.0 0.0 0.01')
 
@@ -130,9 +130,16 @@ for file in os.listdir('xml_files'):
 
                 if root.findtext('name') == 'HAT-P-1':
                     print ('Did find HAT-P-1')
-                    print ('Period       : ', planet.findtext('period'))
-                    print ('Transit Time : ', planet.findtext('transittime'))
-
+                    print ('Period              : ', planet.findtext('period'))
+                    transitTimeBJD = float(planet.findtext('transittime'))
+                    print ('Transit Time BJD    : ', transitTimeBJD)
+                    transitTime = Time(transitTimeBJD,
+                                       format = 'jd',
+                                       scale  = 'utc')
+                    transitTime = transitTime - (1.0/24.0*8.0)
+                    print ('Transit Time        : ',
+                           transitTime.fits)
+                    
 # Get the magntiude of the star. Use the visual magnitude if it is available.
 # If not, use the 'B' magnitude and if that isn't available use the
 # 'J' magnitude. If none of these are avaiable use 20.0 as the magnitude.
@@ -174,6 +181,11 @@ for file in os.listdir('xml_files'):
 # These two times, transitTimeBJD and transitTime are identical times.
 # Need to pick out just one for the code.
 
+# Debugging:
+                        if root.findtext('name') == 'HAT-P-1':
+                            print ('planetPeriod        : ', planetPeriod)
+# Debugging:
+
                         transitTimeBJD = float(
                                            planet.findtext('transittime'))
                         transitTime = Time(transitTimeBJD,
@@ -188,6 +200,11 @@ for file in os.listdir('xml_files'):
 
                         revolutionCount = delta / planetPeriod
 
+# Debugging:
+                        if root.findtext('name') == 'HAT-P-1':
+                            print ('revolutionCount     : ', revolutionCount)
+# Debugging:
+                        
                         intRevolutionCount = int(revolutionCount) + 1
 
 #                        print 'delta              : ', delta
@@ -203,14 +220,21 @@ for file in os.listdir('xml_files'):
 
                         daysToTransit = nextTransit - nowUTC.jd
 
+
 #
 # Change the time to PT by subtracting 8 hours (7 during DTS) from the UTC time
 #
 
-                        nextTransitTimePT = nextTransit - (1.0/24.0*7.0)
+                        nextTransitTimePT = nextTransit - (1.0/24.0*8.0)
                         nTTPT = Time (nextTransitTimePT,
                                        format='jd',
                                        scale='utc')
+# Debugging:
+                        if root.findtext('name') == 'HAT-P-1':
+                            print ('nextTransitTime     : ', nextTransitTime)
+                            print ('daysToTransit       : ', daysToTransit)
+                            print ('nTTPT               : ', nTTPT.fits)
+# Debugging:
 
                         starRadius   = star.findtext('radius')
                         if (starRadius == None):
@@ -309,7 +333,19 @@ for file in os.listdir('xml_files'):
                             night = False
                         else:
                             night = True
-                        
+
+# Debugging
+                        night = True
+                        minAltCutoff = -90
+# Debugging
+
+# Debugging:
+                        if root.findtext('name') == 'HAT-P-1':
+                            print ('d                   : ', d)
+                            print ('planetStarAreaRatio : ', planetStarAreaRatio)
+                            print ('altitude            : ', altAzi.alt.degree)
+# Debugging:
+
                         if (float(mag) < float(minMagCutoff))                     and \
                            d                                                      and \
                            (planetStarAreaRatio >= float(minPlanetStarAreaRatio)) and \
