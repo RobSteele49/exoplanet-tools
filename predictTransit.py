@@ -170,115 +170,134 @@ for file in os.listdir('xml_files'):
 
                     if planet.findtext('transittime') != None:
 
+                        firstTimeInCountTransit = True;
+                        maxCountTransit = 50
+                        for countTransit in range(maxCountTransit):
+                            print ('countTransit : ', countTransit)
+                            
 # These two times, transitTimeBJD and transitTime are identical times.
 # Need to pick out just one for the code.
 
-                        transitTimeBJD = float(
-                                           planet.findtext('transittime'))
-                        transitTime = Time(transitTimeBJD,
-                                           format = 'jd',
-                                           scale='utc')
+                            transitTimeBJD = float(
+                                planet.findtext('transittime'))
+                            transitTime = Time(transitTimeBJD,
+                                               format = 'jd',
+                                               scale='utc')
 
 # 'now' is the current time. Not sure why I'm using the current time and not
 # the range of time specified in the time range.
 # It seems like this should be the start of the time range.
 
-                        delta  = startTime.jd - transitTimeBJD;
+                            delta  = startTime.jd - transitTimeBJD;
 
-                        revolutionCount = delta / planetPeriod
-                        
-                        intRevolutionCount = int(revolutionCount) + 1
+                            revolutionCount = delta / planetPeriod
 
-                        nextTransit = transitTimeBJD + \
-                                      (intRevolutionCount * planetPeriod)
+# Add the number of countTransit to the intRevolutionCount. This starts at 0
+# and keeps incrementing until timeLessThanEnd becomes false. Until I come up
+# with something better when this event is detected I'll set countTransit to 100.
 
-                        nextTransitTime = Time (nextTransit,
-                                                format ='jd',
-                                                scale = 'utc');
+                            intRevolutionCount = int(revolutionCount) + 1 + countTransit
 
-                        daysToTransit = nextTransit - startTime.jd
+                            nextTransit = transitTimeBJD + \
+                                (intRevolutionCount * planetPeriod)
+
+                            nextTransitTime = Time (nextTransit,
+                                                    format ='jd',
+                                                    scale = 'utc');
+
+                            daysToTransit = nextTransit - startTime.jd
 
 #
 # Change the time to PT by subtracting 8 hours (7 during DTS) from the UTC time
 #
 
-                        nextTransitTimePT = nextTransit - (1.0/24.0*8.0)
-                        nTTPT = Time (nextTransitTimePT,
-                                       format='jd',
-                                       scale='utc')
+                            nextTransitTimePT = nextTransit - (1.0/24.0*8.0)
+                            nTTPT = Time (nextTransitTimePT,
+                                          format='jd',
+                                          scale='utc')
 
-                        starRadius   = star.findtext('radius')
-                        if (starRadius == None):
-                            starRadius = float(0.0)
-                        else:
-                            starRadius    = float(starRadius) * \
-                                                  1.3914      * \
-                                                  1000000
+                            starRadius   = star.findtext('radius')
+                            if (starRadius == None):
+                                starRadius = float(0.0)
+                            else:
+                                starRadius    = float(starRadius) * \
+                                    1.3914      * \
+                                    1000000
 
-                        try:
-                            planetRadius   = planet.findtext('radius')
-                        except:
-                            print ('planet.findtext(radius) failed')
-                            print ('file name: ', file)
-                            
-                        if (planetRadius == None):
-                            planetRadius = 0.0
-                        else:
                             try:
-                                planetRadius = float(planetRadius) * 139822
+                                planetRadius   = planet.findtext('radius')
                             except:
-                                print ('float(planetRadius) failed')
+                                print ('planet.findtext(radius) failed')
                                 print ('file name: ', file)
-                                
-                        if (starRadius != 0) and (planetRadius != 0):
-                            starArea            = cmath.pi   * \
-                                                  starRadius * \
-                                                  starRadius
-                            planetArea          = cmath.pi     * \
-                                                  planetRadius * \
-                                                  planetRadius
-                            planetStarAreaRatio = planetArea / starArea
-                        else:
-                            planetStarAreaRatio = 0
                             
-                        a = nextTransitTimePT
-                        b = nowPT.jd + 1
-                        c = a < b
+                            if (planetRadius == None):
+                                planetRadius = 0.0
+                            else:
+                                try:
+                                    planetRadius = float(planetRadius) * 139822
+                                except:
+                                    print ('float(planetRadius) failed')
+                                    print ('file name: ', file)
+                                
+                            if (starRadius != 0) and (planetRadius != 0):
+                                starArea            = cmath.pi   * \
+                                    starRadius * \
+                                    starRadius
+                                planetArea          = cmath.pi     * \
+                                    planetRadius * \
+                                    planetRadius
+                                planetStarAreaRatio = planetArea / starArea
+                            else:
+                                planetStarAreaRatio = 0
+                            
+                            a = nextTransitTimePT
+                            b = nowPT.jd + 1
+                            c = a < b
 
 # d start off as false and is det to true if the time is in the specifed
 # time range
 
-                        d = False
+                            d = False
 
 # Look at the start and end times of the transitting period.
 
-                        if nTTPT.jd > startTime.jd:
-                            timeGreaterThanStartTime = True
-                        else:
-                            timeGreaterThanStartTime = False
+                            if nTTPT.jd > startTime.jd:
+                                timeGreaterThanStartTime = True
+                            else:
+                                timeGreaterThanStartTime = False
 
-                        if nTTPT.jd < endTime.jd:
-                            timeLessThanEndTime = True
-                        else:
-                            timeLessThanEndTime = False
-
-                        if timeGreaterThanStartTime & timeLessThanEndTime:
-                            withinTimeRange = True
-                        else:
-                            withinTimeRange = False
-
-                        if nTTPT.jd > startTime.jd:
                             if nTTPT.jd < endTime.jd:
-                                d = True
+                                timeLessThanEndTime = True
+                            else:
+                                timeLessThanEndTime = False
+                                print ('Abort searching as end time has been exceeded')
+                                print ('countTransit             : ', countTransit)
+                                countTransit = maxCountTransit
+                                print ('countTransit             : ', countTransit)
 
+                            if timeGreaterThanStartTime & timeLessThanEndTime:
+                                withinTimeRange = True
+                            else:
+                                withinTimeRange = False
+
+                            if nTTPT.jd > startTime.jd:
+                                if nTTPT.jd < endTime.jd:
+                                    d = True
+
+# Look for an error in the calculation of d and withinTimeRange
+
+                            if d != withinTimeRange:
+                                print ('Error in d and withinTimeRange')
+                                print ('withinTimeRange          : ', withinTimeRange)
+                                print ('d                        : ', d)
+                            
 # e = sideral_time('apparent',longitude=None,model=None)
 
-                        observingPosition = EarthLocation(lat   = (34+(49/60)+(32/3600))  * u.deg,
-                                                          lon   =-(119+(1/60)+(27/3600))  * u.deg,
+                            observingPosition = EarthLocation(lat   = (34+(49/60)+(32/3600))  * u.deg,
+                                                              lon   =-(119+(1/60)+(27/3600))  * u.deg,
+                                                              height=1621*u.m)  
 
-                                                          height=1621*u.m)  
-
-                        observingNextTransitTime = Time(nextTransitTime.fits)
+                            observingNextTransitTime = Time(nextTransitTime.fits)
 
 
 # Eliminate objects based on
@@ -291,122 +310,125 @@ for file in os.listdir('xml_files'):
 # e) transit happens during daylight hours, between 4 & 18 time.
 # Still need to only output if the transit happens at night.
 
-                        aa = AltAz(location=observingPosition,
-                                   obstime=observingNextTransitTime)
+                            aa = AltAz(location=observingPosition,
+                                       obstime=observingNextTransitTime)
 
-                        ra = root.findtext('rightascension')
-                        dec = root.findtext('declination')
+                            ra = root.findtext('rightascension')
+                            dec = root.findtext('declination')
                             
-                        raHrMinSec   = ra[0:2]   + 'h' + ra[3:5]  + 'm' + \
-                                       ra[6:8]   + 's'
-                        decDegMinSec = dec[0:3]  + 'd' + dec[4:6] + 'm' + \
-                                       dec[8:10] + 's'
+                            raHrMinSec   = ra[0:2]   + 'h' + ra[3:5]  + 'm' + \
+                                           ra[6:8]   + 's'
+                            decDegMinSec = dec[0:3]  + 'd' + dec[4:6] + 'm' + \
+                                           dec[8:10] + 's'
                             
-                        skyCoord = SkyCoord (raHrMinSec + ' ' + \
-                                             decDegMinSec,
-                                             frame='icrs')
+                            skyCoord = SkyCoord (raHrMinSec + ' ' + \
+                                                 decDegMinSec,
+                                                 frame='icrs')
 
-                        altAzi = skyCoord.transform_to(
-                                      AltAz(obstime=observingNextTransitTime,
-                                            location=observingPosition))
+                            altAzi = skyCoord.transform_to(
+                                AltAz(obstime=observingNextTransitTime,
+                                      location=observingPosition))
 
 # Looking for hour of transit (PT). For now day time is between
 # 06 and 17 hours. Night would be defined as true if we are not in
 # this range:
 
-                        hour = nTTPT.fits[11:13];
+                            hour = nTTPT.fits[11:13];
 
-                        if (hour > observingMorningTime and
-                            hour < observingEveningTime):
-                            night = False
-                        else:
-                            night = True
+                            if (hour > observingMorningTime and
+                                hour < observingEveningTime):
+                                night = False
+                            else:
+                                night = True
 
 # Debugging:
-                        if root.findtext('name') == 'HD 56414':
-                            print ('******* DEBUGGING *******')
-                            print ('revolutionCount          : ', revolutionCount)
-                            print ('intRevolutionCount       : ', intRevolutionCount)
-                            print ('delta                    : ', delta)
-                            print ('startTime                : ', startTime)
-                            print ('startTime.jd             : ', startTime.jd)
-                            print ('startTime.fits           : ', startTime.fits)
-                            print ('transitTimeBJD           : ', transitTimeBJD)
-                            print ('nextTransitTime          : ', nextTransitTime)
-                            print ('daysToTransit            : ', daysToTransit)
-                            print ('nTTPT                    : ', nTTPT.fits)
-                            print ('Period                   : ', planet.findtext('period'))
-                            print ('Is transiting?           : ',
-                                   planet.findtext('istransiting'))
-                            print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
-                            print ('timeLessThanEndTime      : ', timeLessThanEndTime)
-                            print ('withinTimeRange          : ', withinTimeRange)
-                            print ('d                        : ', d)
-                            print ('planetStarAreaRatio      : ', planetStarAreaRatio)
-                            print ('altitude                 : ', altAzi.alt.degree)
-                            print ('***** DEBUGGING *****')
+                            if root.findtext('name') == 'HD 56414':
+                                print ('******* DEBUGGING *******')
+                                print ('countTransit             : ', countTransit)
+                                print ('revolutionCount          : ', revolutionCount)
+                                print ('intRevolutionCount       : ', intRevolutionCount)
+                                print ('delta                    : ', delta)
+                                print ('startTime                : ', startTime)
+                                print ('startTime.jd             : ', startTime.jd)
+                                print ('startTime.fits           : ', startTime.fits)
+                                print ('transitTimeBJD           : ', transitTimeBJD)
+                                print ('nextTransitTime          : ', nextTransitTime)
+                                print ('daysToTransit            : ', daysToTransit)
+                                print ('nTTPT                    : ', nTTPT.fits)
+                                print ('Period                   : ', planet.findtext('period'))
+                                print ('Is transiting?           : ',
+                                       planet.findtext('istransiting'))
+                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
+                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
+                                print ('withinTimeRange          : ', withinTimeRange)
+                                print ('d                        : ', d)
+                                print ('planetStarAreaRatio      : ', planetStarAreaRatio)
+                                print ('altitude                 : ', altAzi.alt.degree)
+                                print ('******* DEBUGGING *******')
 # Debugging
 
 # Debugging
-#                        night                  =  True
-#                        minPlanetStarAreaRatio =   0.0003
-#                        minAltCutoff           = -30
+#                            night                  =  True
+#                            minPlanetStarAreaRatio =   0.0003
+#                            minAltCutoff           = -30
 # Debugging
 
+                            if (float(mag) < float(minMagCutoff))                     and \
+                               d                                                      and \
+                               (planetStarAreaRatio >= float(minPlanetStarAreaRatio)) and \
+                               (altAzi.alt.degree > float(minAltCutoff))              and \
+                               night:
+                                count = count + 1
+
+                                print ('------------------')
+
+                                print ('file name                : ', file)
+
 # Debugging:
-#                        if root.findtext('name') == 'HD 56414':
-#                            print ('d                   : ', d)
-#                            print ('planetStarAreaRatio : ', planetStarAreaRatio)
-#                            print ('altitude            : ', altAzi.alt.degree)
-# Debugging:
+                                print ('countTransit             : ', countTransit)
+                                print ('intRevolutionCount       : ', intRevolutionCount)
+                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
+                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
+                                print ('withinTimeRange          : ', withinTimeRange)
+                                print ('d                        : ', d)
+# End of debugging print statements
 
-                        if (float(mag) < float(minMagCutoff))                     and \
-                           d                                                      and \
-                           (planetStarAreaRatio >= float(minPlanetStarAreaRatio)) and \
-                           (altAzi.alt.degree > float(minAltCutoff))              and \
-                           night:
-                            count = count + 1
+                                print ('System name              : ',  \
+                                       root.findtext('name'))
 
-                            print ('------------------')
+                                print ('Planet name              : ',  \
+                                       planet.findtext('name'))
 
-                            print ('file name                : ', file)
+                                print ('Planet period            : ',  \
+                                       "{:.1f}".format(float(planet.findtext('period'))))
 
-                            print ('System name              : ',  \
-                                   root.findtext('name'))
+                                print ('System Right Ascension   :  ', \
+                                       root.findtext('rightascension'))
 
-                            print ('Planet name              : ',  \
-                                   planet.findtext('name'))
+                                print ('System Declination       : ',  \
+                                       root.findtext('declination'))
 
-                            print ('Planet period            : ',  \
-                                   "{:.1f}".format(float(planet.findtext('period'))))
+                                print ('System Magnitude         : ',  \
+                                       "{:.1f}".format(float(mag)))
 
-                            print ('System Right Ascension   :  ', \
-                                   root.findtext('rightascension'))
+                                print ('observingNextTransitTime : ',  \
+                                       nTTPT.fits, 'PT')
 
-                            print ('System Declination       : ',  \
-                                   root.findtext('declination'))
+                                print ('Azimuth                  : ',  \
+                                       "{:.2f}".format(altAzi.az.degree))
 
-                            print ('System Magnitude         : ',  \
-                                   "{:.1f}".format(float(mag)))
+                                print ('Altitude                 : ',  \
+                                       "{:.2f}".format(altAzi.alt.degree))
 
-                            print ('observingNextTransitTime : ',  \
-                                   nTTPT.fits, 'PT')
-
-                            print ('Azimuth                  : ',  \
-                                   "{:.2f}".format(altAzi.az.degree))
-
-                            print ('Altitude                 : ',  \
-                                   "{:.2f}".format(altAzi.alt.degree))
-
-                            print ('Days until transit       : ',  \
-                                   "{:.2f}".format(daysToTransit))
+                                print ('Days until transit       : ',  \
+                                       "{:.2f}".format(daysToTransit))
                             
-                            print ('Planet/Star area ratio   : ',  \
-                                   "{:.3f}".format(planetStarAreaRatio))
+                                print ('Planet/Star area ratio   : ',  \
+                                       "{:.3f}".format(planetStarAreaRatio))
 
-                            print ('count                    : ',  \
-                                   count)
+                                print ('count                    : ',  \
+                                       count)
 
-                            print ('Description              : ',  \
-                                   planet.findtext('description'))
+                                print ('Description              : ',  \
+                                       planet.findtext('description'))
 
