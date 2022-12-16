@@ -125,24 +125,6 @@ for file in os.listdir('xml_files'):
         for planet in star.findall('.//planet'):
             if planet.findtext ('istransiting') == '1':
 
-# Check for HAT-P-1 as that one is a good one to check the rest of the logic.
-
-# Debugging
-#                if root.findtext('name') == 'HD 56414':
-#                    print ('Did find HD 56414')
-#                    print ('Period              : ', planet.findtext('period'))
-#                    transitTimeBJD = float(planet.findtext('transittime'))
-#                    print ('Transit Time BJD    : ', transitTimeBJD)
-#                    transitTime = Time(transitTimeBJD,
-#                                       format = 'jd',
-#                                       scale  = 'utc')
-#                    transitTime = transitTime - (1.0/24.0*8.0)
-#                    print ('Transit Time        : ',
-#                           transitTime.fits)
-#                    print ('Is transiting?      : ',
-#                           planet.findtext('istransiting'))
-# Debugging
-
 # Get the magntiude of the star. Use the visual magnitude if it is available.
 # If not, use the 'B' magnitude and if that isn't available use the
 # 'J' magnitude. If none of these are avaiable use 20.0 as the magnitude.
@@ -184,11 +166,6 @@ for file in os.listdir('xml_files'):
 # These two times, transitTimeBJD and transitTime are identical times.
 # Need to pick out just one for the code.
 
-# Debugging:
-#                        if root.findtext('name') == 'HD 56414':
-#                            print ('planetPeriod        : ', planetPeriod)
-# Debugging:
-
                         transitTimeBJD = float(
                                            planet.findtext('transittime'))
                         transitTime = Time(transitTimeBJD,
@@ -202,26 +179,9 @@ for file in os.listdir('xml_files'):
                         delta  = startTime.jd - transitTimeBJD;
 
                         revolutionCount = delta / planetPeriod
-
-# Debugging:
-                        if root.findtext('name') == 'HD 56414':
-                            print ('revolutionCount     : ', revolutionCount)
-                            print ('delta               : ', delta)
-                            print ('nowUTC              : ', nowUTC)
-                            print ('nowUTC.jd           : ', nowUTC.jd)
-                            print ('nowUTC.fits         : ', nowUTC.fits)
-                            print ('startTime           : ', startTime)
-                            print ('startTime.jd        : ', startTime.jd)
-                            print ('startTime.fits      : ', startTime.fits)
-                            print ('transitTimeBJD      : ', transitTimeBJD)
-# Debugging:
                         
                         intRevolutionCount = int(revolutionCount) + 1
 
-#                        print 'delta              : ', delta
-#                        print 'revolutionCount    : ', revolutionCount
-#                        print 'intRevolutionCount : ', intRevolutionCount
-                        
                         nextTransit = transitTimeBJD + \
                                       (intRevolutionCount * planetPeriod)
 
@@ -230,7 +190,6 @@ for file in os.listdir('xml_files'):
                                                 scale = 'utc');
 
                         daysToTransit = nextTransit - startTime.jd
-
 
 #
 # Change the time to PT by subtracting 8 hours (7 during DTS) from the UTC time
@@ -241,11 +200,26 @@ for file in os.listdir('xml_files'):
                                        format='jd',
                                        scale='utc')
 # Debugging:
-#                        if root.findtext('name') == 'HD 56414':
-#                            print ('nextTransitTime     : ', nextTransitTime)
-#                            print ('daysToTransit       : ', daysToTransit)
-#                            print ('nTTPT               : ', nTTPT.fits)
-# Debugging:
+                        if root.findtext('name') == 'HD 56414':
+                            print ('***** DEBUGGING *****')
+                            print ('revolutionCount     : ', revolutionCount)
+                            print ('intRevolutionCount  : ', intRevolutionCount)
+                            print ('delta               : ', delta)
+                            print ('nowUTC              : ', nowUTC)
+                            print ('nowUTC.jd           : ', nowUTC.jd)
+                            print ('nowUTC.fits         : ', nowUTC.fits)
+                            print ('startTime           : ', startTime)
+                            print ('startTime.jd        : ', startTime.jd)
+                            print ('startTime.fits      : ', startTime.fits)
+                            print ('transitTimeBJD      : ', transitTimeBJD)
+                            print ('nextTransitTime     : ', nextTransitTime)
+                            print ('daysToTransit       : ', daysToTransit)
+                            print ('nTTPT               : ', nTTPT.fits)
+                            print ('Period              : ', planet.findtext('period'))
+                            print ('Is transiting?      : ',
+                                   planet.findtext('istransiting'))
+                            print ('***** DEBUGGING *****')
+# Debugging
 
                         starRadius   = star.findtext('radius')
                         if (starRadius == None):
