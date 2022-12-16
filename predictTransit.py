@@ -88,8 +88,10 @@ minPlanetStarAreaRatio = 0.01
 
 # This reads into 'file' all of the files in the xml_files directory
 
+# Start of the for loop looping over all of the xml files.
+
 for file in os.listdir('xml_files'):
-    
+
 #    print ("Debugging, file: ", file)
     
 # Because of the way I set my the xml_files directory all of the files
@@ -119,7 +121,12 @@ for file in os.listdir('xml_files'):
             print ('star.findall raised an exception.')
             print ('file name: ', file)
             
+# Start of for loop, looping over all of the planets within the system
+            
         for planet in star.findall('.//planet'):
+
+# Only look at planets that are transitting
+
             if planet.findtext ('istransiting') == '1':
 
 # Get the magntiude of the star. Use the visual magnitude if it is available.
@@ -148,6 +155,9 @@ for file in os.listdir('xml_files'):
                                             mag = star.findtext('magK')
                                         else:
                                             mag = 20.0
+
+# End of magnitude check, use a magnitude of 20 if there isn't anything in
+# the xml file.
 
                 planetPeriod = planet.findtext('period')
 
@@ -196,24 +206,6 @@ for file in os.listdir('xml_files'):
                         nTTPT = Time (nextTransitTimePT,
                                        format='jd',
                                        scale='utc')
-# Debugging:
-                        if root.findtext('name') == 'HD 56414':
-                            print ('***** DEBUGGING *****')
-                            print ('revolutionCount     : ', revolutionCount)
-                            print ('intRevolutionCount  : ', intRevolutionCount)
-                            print ('delta               : ', delta)
-                            print ('startTime           : ', startTime)
-                            print ('startTime.jd        : ', startTime.jd)
-                            print ('startTime.fits      : ', startTime.fits)
-                            print ('transitTimeBJD      : ', transitTimeBJD)
-                            print ('nextTransitTime     : ', nextTransitTime)
-                            print ('daysToTransit       : ', daysToTransit)
-                            print ('nTTPT               : ', nTTPT.fits)
-                            print ('Period              : ', planet.findtext('period'))
-                            print ('Is transiting?      : ',
-                                   planet.findtext('istransiting'))
-                            print ('***** DEBUGGING *****')
-# Debugging
 
                         starRadius   = star.findtext('radius')
                         if (starRadius == None):
@@ -257,7 +249,24 @@ for file in os.listdir('xml_files'):
 # time range
 
                         d = False
-                        
+
+# Look at the start and end times of the transitting period.
+
+                        if nTTPT.jd > startTime.jd:
+                            timeGreaterThanStartTime = True
+                        else:
+                            timeGreaterThanStartTime = False
+
+                        if nTTPT.jd < endTime.jd:
+                            timeLessThanEndTime = True
+                        else:
+                            timeLessThanEndTime = False
+
+                        if timeGreaterThanStartTime & timeLessThanEndTime:
+                            withinTimeRange = True
+                        else:
+                            withinTimeRange = False
+
                         if nTTPT.jd > startTime.jd:
                             if nTTPT.jd < endTime.jd:
                                 d = True
@@ -312,6 +321,31 @@ for file in os.listdir('xml_files'):
                             night = False
                         else:
                             night = True
+
+# Debugging:
+                        if root.findtext('name') == 'HD 56414':
+                            print ('******* DEBUGGING *******')
+                            print ('revolutionCount          : ', revolutionCount)
+                            print ('intRevolutionCount       : ', intRevolutionCount)
+                            print ('delta                    : ', delta)
+                            print ('startTime                : ', startTime)
+                            print ('startTime.jd             : ', startTime.jd)
+                            print ('startTime.fits           : ', startTime.fits)
+                            print ('transitTimeBJD           : ', transitTimeBJD)
+                            print ('nextTransitTime          : ', nextTransitTime)
+                            print ('daysToTransit            : ', daysToTransit)
+                            print ('nTTPT                    : ', nTTPT.fits)
+                            print ('Period                   : ', planet.findtext('period'))
+                            print ('Is transiting?           : ',
+                                   planet.findtext('istransiting'))
+                            print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
+                            print ('timeLessThanEndTime      : ', timeLessThanEndTime)
+                            print ('withinTimeRange          : ', withinTimeRange)
+                            print ('d                        : ', d)
+                            print ('planetStarAreaRatio      : ', planetStarAreaRatio)
+                            print ('altitude                 : ', altAzi.alt.degree)
+                            print ('***** DEBUGGING *****')
+# Debugging
 
 # Debugging
 #                        night                  =  True
