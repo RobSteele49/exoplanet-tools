@@ -40,7 +40,6 @@ import time
 
 import xml.etree.ElementTree as ET
 
-
 # As of 2018-08-29 the variable 'fileList' is NOT used in the program.
 
 fileList = (os.listdir('xml_files'))
@@ -72,19 +71,19 @@ endTime   = Time(datetime.now()+timedelta(4), scale='utc')
 # below. This logic can be commented out when unnecessary.
 
 startTime = Time(datetime(2022,12,18,0,0,0), scale='utc')
-endTime   = Time(datetime(2022,12,23,0,0,0), scale='utc')
+endTime   = Time(datetime(2023,12,31,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
 print ('endTime      : ', endTime)
 
-observingMorningTime = '04'
+observingMorningTime = '06'
 observingEveningTime = '16'
 
 print ('Hardwire minMagCutoff, minAltCutoff, and minPlanetStarAreaRatio to 10.0 0.0 0.01')
 
 minMagCutoff           = 10.75
 minAltCutoff           = 10.0
-minPlanetStarAreaRatio = 0.008
+minPlanetStarAreaRatio = 0.01
 
 #minMagCutoff           = input ('Enter minimum magnitude  : ')
 #minAltCutoff           = input ('Enter minimum altitude   : ')
@@ -129,8 +128,8 @@ for file in os.listdir('xml_files'):
 # Check for HAT-P-1 as that one is a good one to check the rest of the logic.
 
 # Debugging
-#                if root.findtext('name') == 'HAT-P-1':
-#                    print ('Did find HAT-P-1')
+#                if root.findtext('name') == 'HD 56414':
+#                    print ('Did find HD 56414')
 #                    print ('Period              : ', planet.findtext('period'))
 #                    transitTimeBJD = float(planet.findtext('transittime'))
 #                    print ('Transit Time BJD    : ', transitTimeBJD)
@@ -140,6 +139,8 @@ for file in os.listdir('xml_files'):
 #                    transitTime = transitTime - (1.0/24.0*8.0)
 #                    print ('Transit Time        : ',
 #                           transitTime.fits)
+#                    print ('Is transiting?      : ',
+#                           planet.findtext('istransiting'))
 # Debugging
 
 # Get the magntiude of the star. Use the visual magnitude if it is available.
@@ -184,7 +185,7 @@ for file in os.listdir('xml_files'):
 # Need to pick out just one for the code.
 
 # Debugging:
-#                        if root.findtext('name') == 'HAT-P-1':
+#                        if root.findtext('name') == 'HD 56414':
 #                            print ('planetPeriod        : ', planetPeriod)
 # Debugging:
 
@@ -198,13 +199,21 @@ for file in os.listdir('xml_files'):
 # the range of time specified in the time range.
 # It seems like this should be the start of the time range.
 
-                        delta  = nowUTC.jd - transitTimeBJD;
+                        delta  = startTime.jd - transitTimeBJD;
 
                         revolutionCount = delta / planetPeriod
 
 # Debugging:
-#                        if root.findtext('name') == 'HAT-P-1':
-#                            print ('revolutionCount     : ', revolutionCount)
+                        if root.findtext('name') == 'HD 56414':
+                            print ('revolutionCount     : ', revolutionCount)
+                            print ('delta               : ', delta)
+                            print ('nowUTC              : ', nowUTC)
+                            print ('nowUTC.jd           : ', nowUTC.jd)
+                            print ('nowUTC.fits         : ', nowUTC.fits)
+                            print ('startTime           : ', startTime)
+                            print ('startTime.jd        : ', startTime.jd)
+                            print ('startTime.fits      : ', startTime.fits)
+                            print ('transitTimeBJD      : ', transitTimeBJD)
 # Debugging:
                         
                         intRevolutionCount = int(revolutionCount) + 1
@@ -220,7 +229,7 @@ for file in os.listdir('xml_files'):
                                                 format ='jd',
                                                 scale = 'utc');
 
-                        daysToTransit = nextTransit - nowUTC.jd
+                        daysToTransit = nextTransit - startTime.jd
 
 
 #
@@ -232,7 +241,7 @@ for file in os.listdir('xml_files'):
                                        format='jd',
                                        scale='utc')
 # Debugging:
-#                        if root.findtext('name') == 'HAT-P-1':
+#                        if root.findtext('name') == 'HD 56414':
 #                            print ('nextTransitTime     : ', nextTransitTime)
 #                            print ('daysToTransit       : ', daysToTransit)
 #                            print ('nTTPT               : ', nTTPT.fits)
@@ -337,12 +346,13 @@ for file in os.listdir('xml_files'):
                             night = True
 
 # Debugging
-#                        night = True
-#                        minAltCutoff = -90
+#                        night                  =  True
+#                        minPlanetStarAreaRatio =   0.0003
+#                        minAltCutoff           = -30
 # Debugging
 
 # Debugging:
-#                        if root.findtext('name') == 'HAT-P-1':
+#                        if root.findtext('name') == 'HD 56414':
 #                            print ('d                   : ', d)
 #                            print ('planetStarAreaRatio : ', planetStarAreaRatio)
 #                            print ('altitude            : ', altAzi.alt.degree)
