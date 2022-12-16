@@ -58,9 +58,6 @@ nowPT    = Time (dateTime, scale='utc')
 print ('nowPT        : ', nowPT, 'PT')
 
 dateTimeUTC = datetime.utcnow()
-nowUTC      = Time (dateTimeUTC, scale='utc')
-
-print ('nowUTC       : ', nowUTC, 'UTC')
 
 # This will search for 4 days (timedelta(4))
 
@@ -205,9 +202,6 @@ for file in os.listdir('xml_files'):
                             print ('revolutionCount     : ', revolutionCount)
                             print ('intRevolutionCount  : ', intRevolutionCount)
                             print ('delta               : ', delta)
-                            print ('nowUTC              : ', nowUTC)
-                            print ('nowUTC.jd           : ', nowUTC.jd)
-                            print ('nowUTC.fits         : ', nowUTC.fits)
                             print ('startTime           : ', startTime)
                             print ('startTime.jd        : ', startTime.jd)
                             print ('startTime.fits      : ', startTime.fits)
