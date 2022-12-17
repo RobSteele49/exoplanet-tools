@@ -92,8 +92,6 @@ minPlanetStarAreaRatio = 0.01
 
 for file in os.listdir('xml_files'):
 
-#    print ("Debugging, file: ", file)
-    
 # Because of the way I set my the xml_files directory all of the files
 # are xml files
 
@@ -171,9 +169,8 @@ for file in os.listdir('xml_files'):
                     if planet.findtext('transittime') != None:
 
                         firstTimeInCountTransit = True;
-                        maxCountTransit = 50
+                        maxCountTransit = 801
                         for countTransit in range(maxCountTransit):
-                            print ('countTransit : ', countTransit)
                             
 # These two times, transitTimeBJD and transitTime are identical times.
 # Need to pick out just one for the code.
@@ -254,11 +251,6 @@ for file in os.listdir('xml_files'):
                             b = nowPT.jd + 1
                             c = a < b
 
-# d start off as false and is det to true if the time is in the specifed
-# time range
-
-                            d = False
-
 # Look at the start and end times of the transitting period.
 
                             if nTTPT.jd > startTime.jd:
@@ -266,31 +258,27 @@ for file in os.listdir('xml_files'):
                             else:
                                 timeGreaterThanStartTime = False
 
+# Look for the end time to be exceeded. If it has break out of the loop.
+
                             if nTTPT.jd < endTime.jd:
                                 timeLessThanEndTime = True
                             else:
                                 timeLessThanEndTime = False
-                                print ('Abort searching as end time has been exceeded')
-                                print ('countTransit             : ', countTransit)
-                                countTransit = maxCountTransit
-                                print ('countTransit             : ', countTransit)
+                                break
 
+# This 'if' statement is looking for the condition where the maxCount was not set
+# high enough for the time interval and the short period of a planet. If this
+# is reported then the maxCount should be set higher.
+
+                            if countTransit == maxCountTransit-1:
+                                print ('Count transit = (maxCountTransit-1)')
+                                print ('countTransit : ', countTransit)
+                                
                             if timeGreaterThanStartTime & timeLessThanEndTime:
                                 withinTimeRange = True
                             else:
                                 withinTimeRange = False
 
-                            if nTTPT.jd > startTime.jd:
-                                if nTTPT.jd < endTime.jd:
-                                    d = True
-
-# Look for an error in the calculation of d and withinTimeRange
-
-                            if d != withinTimeRange:
-                                print ('Error in d and withinTimeRange')
-                                print ('withinTimeRange          : ', withinTimeRange)
-                                print ('d                        : ', d)
-                            
 # e = sideral_time('apparent',longitude=None,model=None)
 
                             observingPosition = EarthLocation(lat   = (34+(49/60)+(32/3600))  * u.deg,
@@ -361,7 +349,6 @@ for file in os.listdir('xml_files'):
                                 print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
                                 print ('timeLessThanEndTime      : ', timeLessThanEndTime)
                                 print ('withinTimeRange          : ', withinTimeRange)
-                                print ('d                        : ', d)
                                 print ('planetStarAreaRatio      : ', planetStarAreaRatio)
                                 print ('altitude                 : ', altAzi.alt.degree)
                                 print ('******* DEBUGGING *******')
@@ -374,7 +361,7 @@ for file in os.listdir('xml_files'):
 # Debugging
 
                             if (float(mag) < float(minMagCutoff))                     and \
-                               d                                                      and \
+                               withinTimeRange                                        and \
                                (planetStarAreaRatio >= float(minPlanetStarAreaRatio)) and \
                                (altAzi.alt.degree > float(minAltCutoff))              and \
                                night:
@@ -390,7 +377,6 @@ for file in os.listdir('xml_files'):
                                 print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
                                 print ('timeLessThanEndTime      : ', timeLessThanEndTime)
                                 print ('withinTimeRange          : ', withinTimeRange)
-                                print ('d                        : ', d)
 # End of debugging print statements
 
                                 print ('System name              : ',  \
