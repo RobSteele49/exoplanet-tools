@@ -67,8 +67,8 @@ endTime   = Time(datetime.now()+timedelta(4), scale='utc')
 # Overwritting the start and end times with hard wired number is done
 # below. This logic can be commented out when unnecessary.
 
-startTime = Time(datetime(2022,12,18,0,0,0), scale='utc')
-endTime   = Time(datetime(2023,12,31,0,0,0), scale='utc')
+startTime = Time(datetime(2023,1,1,0,0,0), scale='utc')
+endTime   = Time(datetime(2023,1,5,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
 print ('endTime      : ', endTime)
@@ -330,28 +330,28 @@ for file in os.listdir('xml_files'):
                                 night = True
 
 # Debugging:
-                            if root.findtext('name') == 'HD 56414':
-                                print ('******* DEBUGGING *******')
-                                print ('countTransit             : ', countTransit)
-                                print ('revolutionCount          : ', revolutionCount)
-                                print ('intRevolutionCount       : ', intRevolutionCount)
-                                print ('delta                    : ', delta)
-                                print ('startTime                : ', startTime)
-                                print ('startTime.jd             : ', startTime.jd)
-                                print ('startTime.fits           : ', startTime.fits)
-                                print ('transitTimeBJD           : ', transitTimeBJD)
-                                print ('nextTransitTime          : ', nextTransitTime)
-                                print ('daysToTransit            : ', daysToTransit)
-                                print ('nTTPT                    : ', nTTPT.fits)
-                                print ('Period                   : ', planet.findtext('period'))
-                                print ('Is transiting?           : ',
-                                       planet.findtext('istransiting'))
-                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
-                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
-                                print ('withinTimeRange          : ', withinTimeRange)
-                                print ('planetStarAreaRatio      : ', planetStarAreaRatio)
-                                print ('altitude                 : ', altAzi.alt.degree)
-                                print ('******* DEBUGGING *******')
+#                            if root.findtext('name') == 'HD 56414':
+#                                print ('******* DEBUGGING *******')
+#                                print ('countTransit             : ', countTransit)
+#                                print ('revolutionCount          : ', revolutionCount)
+#                                print ('intRevolutionCount       : ', intRevolutionCount)
+#                                print ('delta                    : ', delta)
+#                                print ('startTime                : ', startTime)
+#                                print ('startTime.jd             : ', startTime.jd)
+#                                print ('startTime.fits           : ', startTime.fits)
+#                                print ('transitTimeBJD           : ', transitTimeBJD)
+#                                print ('nextTransitTime          : ', nextTransitTime)
+#                                print ('daysToTransit            : ', daysToTransit)
+#                                print ('nTTPT                    : ', nTTPT.fits)
+#                                print ('Period                   : ', planet.findtext('period'))
+#                                print ('Is transiting?           : ',
+#                                       planet.findtext('istransiting'))
+#                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
+#                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
+#                                print ('withinTimeRange          : ', withinTimeRange)
+#                                print ('planetStarAreaRatio      : ', planetStarAreaRatio)
+#                                print ('altitude                 : ', altAzi.alt.degree)
+#                                print ('******* DEBUGGING *******')
 # Debugging
 
 # Debugging
