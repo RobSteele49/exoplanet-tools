@@ -1,0 +1,310 @@
+nowPT        :  2022-12-17 19:38:15.057480 PT
+startTime    :  2022-12-17 00:00:00
+endTime      :  2022-12-23 00:00:00
+Hardwire minMagCutoff, minAltCutoff, and minPlanetStarAreaRatio to 10.0 0.0 0.01
+------------------
+file name                :  HAT-P-1.xml
+countTransit             :  1
+intRevolutionCount       :  1248
+System name              :  HAT-P-1
+Planet name              :  HAT-P-1 b
+Planet period            :  4.5
+System Right Ascension   :   22 57 46.8443
+System Declination       :  +38 40 30.3553
+System Magnitude         :  10.4
+observingNextTransitTime :  2022-12-22T19:12:07.764 PT
+Azimuth                  :  288.60
+Altitude                 :  61.13
+Days until transit       :  6.13
+Planet/Star area ratio   :  0.012
+count                    :  1
+Description              :  None
+------------------
+file name                :  HAT-P-22.xml
+countTransit             :  1
+intRevolutionCount       :  1558
+System name              :  HAT-P-22
+Planet name              :  HAT-P-22 b
+Planet period            :  3.2
+System Right Ascension   :   10 22 43.5924
+System Declination       :  +50 07 42.0634
+System Magnitude         :  9.8
+observingNextTransitTime :  2022-12-21T00:36:37.728 PT
+Azimuth                  :  51.52
+Altitude                 :  47.10
+Days until transit       :  4.36
+Planet/Star area ratio   :  0.011
+count                    :  2
+Description              :  None
+------------------
+file name                :  HAT-P-30.xml
+countTransit             :  0
+intRevolutionCount       :  1592
+System name              :  HAT-P-30
+Planet name              :  HAT-P-30 b
+Planet period            :  2.8
+System Right Ascension   :   08 15 48
+System Declination       :  +05 50 12
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-17T02:23:18.240 PT
+Azimuth                  :  177.08
+Altitude                 :  60.91
+Days until transit       :  0.43
+Planet/Star area ratio   :  0.012
+count                    :  3
+Description              :  This exoplanet is transiting the dwarf star GSC 0208-00722. The sky projection of the planet's orbit normal and the star's spin axis is 73.5 degrees.
+------------------
+file name                :  HAT-P-30.xml
+countTransit             :  1
+intRevolutionCount       :  1593
+System name              :  HAT-P-30
+Planet name              :  HAT-P-30 b
+Planet period            :  2.8
+System Right Ascension   :   08 15 48
+System Declination       :  +05 50 12
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-19T21:50:33.648 PT
+Azimuth                  :  98.76
+Altitude                 :  22.25
+Days until transit       :  3.24
+Planet/Star area ratio   :  0.012
+count                    :  4
+Description              :  This exoplanet is transiting the dwarf star GSC 0208-00722. The sky projection of the planet's orbit normal and the star's spin axis is 73.5 degrees.
+------------------
+file name                :  HD 189733.xml
+countTransit             :  1
+intRevolutionCount       :  2842
+System name              :  HD 189733
+Planet name              :  HD 189733 A b
+Planet period            :  2.2
+System Right Ascension   :   20 00 43
+System Declination       :  +22 42 39
+System Magnitude         :  7.7
+observingNextTransitTime :  2022-12-20T17:51:45.248 PT
+Azimuth                  :  272.89
+Altitude                 :  38.37
+Days until transit       :  4.08
+Planet/Star area ratio   :  0.021
+count                    :  5
+Description              :  The planet HD 189733 b is a transiting hot Jupiter on a 2 day orbit. Astronomers have observed the secondary eclipse with the Hubble Space Telescope. They found evidence for optically thick reflective clouds on the dayside hemisphere. According to the best-fit albedo values, the planet would appear deep blue at visible wavelengths.
+------------------
+file name                :  HD 209458.xml
+countTransit             :  0
+intRevolutionCount       :  2429
+System name              :  HD 209458
+Planet name              :  HD 209458 b
+Planet period            :  3.5
+System Right Ascension   :   22 03 10.7729
+System Declination       :  +18 53 03.5482
+System Magnitude         :  7.6
+observingNextTransitTime :  2022-12-17T19:53:44.889 PT
+Azimuth                  :  266.92
+Altitude                 :  39.05
+Days until transit       :  1.16
+Planet/Star area ratio   :  0.015
+count                    :  6
+Description              :  By studying the carbon monoxide gas in the upper atmosphere with great accuracy, astronomers found evidence for a wind, blowing at a speed of 5000 to 10000 km per hour.
+------------------
+file name                :  KELT-23.xml
+countTransit             :  0
+intRevolutionCount       :  853
+System name              :  KELT-23
+Planet name              :  KELT-23 A b
+Planet period            :  2.3
+System Right Ascension   :   15 28 35.193
+System Declination       :  +66 21 31.54
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-17T05:09:50.659 PT
+Azimuth                  :  29.27
+Altitude                 :  40.43
+Days until transit       :  0.55
+Planet/Star area ratio   :  0.018
+count                    :  7
+Description              :  This is a hot Jupiter orbiting a Near-Solar twin system.
+------------------
+file name                :  KELT-23.xml
+countTransit             :  2
+intRevolutionCount       :  855
+System name              :  KELT-23
+Planet name              :  KELT-23 A b
+Planet period            :  2.3
+System Right Ascension   :   15 28 35.193
+System Declination       :  +66 21 31.54
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-21T17:24:58.032 PT
+Azimuth                  :  338.26
+Altitude                 :  20.77
+Days until transit       :  5.06
+Planet/Star area ratio   :  0.018
+count                    :  8
+Description              :  This is a hot Jupiter orbiting a Near-Solar twin system.
+------------------
+file name                :  WASP-121.xml
+countTransit             :  4
+intRevolutionCount       :  2588
+System name              :  WASP-121
+Planet name              :  WASP-121 b
+Planet period            :  1.3
+System Right Ascension   :   07 10 24.0606
+System Declination       :  -39 05 50.5705
+System Magnitude         :  10.5
+observingNextTransitTime :  2022-12-22T00:28:16.954 PT
+Azimuth                  :  172.86
+Altitude                 :  15.60
+Days until transit       :  5.35
+Planet/Star area ratio   :  0.016
+count                    :  9
+Description              :  This planet is a remarkable short-period transiting hot Jupiter discovered by the WASP-South survey in close collaboration with the Euler TRAPPIST telescopes.
+------------------
+file name                :  WASP-180.xml
+countTransit             :  1
+intRevolutionCount       :  637
+System name              :  WASP-180
+Planet name              :  WASP-180 A b
+Planet period            :  3.4
+System Right Ascension   :   08 13 34.15
+System Declination       :  -01 58 57.9
+System Magnitude         :  10.7
+observingNextTransitTime :  2022-12-21T04:23:16.915 PT
+Azimuth                  :  227.16
+Altitude                 :  41.79
+Days until transit       :  4.52
+Planet/Star area ratio   :  0.011
+count                    :  10
+Description              :  This planet was discovered by Temple et al. 2019. This was a ground based discovery. The parameters listed here are those reported by Temple et al. 2019 and were imported into the Open Exoplanet Catalogue from the NASA Exoplanet Archive.
+------------------
+file name                :  WASP-3.xml
+countTransit             :  2
+intRevolutionCount       :  2886
+System name              :  WASP-3
+Planet name              :  WASP-3 b
+Planet period            :  1.8
+System Right Ascension   :   18 34 32
+System Declination       :  +35 39 42
+System Magnitude         :  10.6
+observingNextTransitTime :  2022-12-21T16:45:59.547 PT
+Azimuth                  :  290.73
+Altitude                 :  38.55
+Days until transit       :  5.03
+Planet/Star area ratio   :  0.012
+count                    :  11
+Description              :  None
+------------------
+file name                :  WASP-54.xml
+countTransit             :  1
+intRevolutionCount       :  1196
+System name              :  WASP-54
+Planet name              :  WASP-54 b
+Planet period            :  3.7
+System Right Ascension   :   13 41 49.0301
+System Declination       :  -00 07 41.0337
+System Magnitude         :  10.4
+observingNextTransitTime :  2022-12-22T02:41:42.052 PT
+Azimuth                  :  99.87
+Altitude                 :  13.45
+Days until transit       :  5.45
+Planet/Star area ratio   :  0.014
+count                    :  12
+Description              :  This planet has been announced at the Extreme Solar Systems II conference in Jackson Hole by the WASP team.
+------------------
+file name                :  WASP-76.xml
+countTransit             :  2
+intRevolutionCount       :  2115
+System name              :  WASP-76
+Planet name              :  WASP-76 b
+Planet period            :  1.8
+System Right Ascension   :   01 46 31.8576
+System Declination       :  +02 42 02.0331
+System Magnitude         :  9.5
+observingNextTransitTime :  2022-12-21T22:20:06.144 PT
+Azimuth                  :  238.17
+Altitude                 :  41.10
+Days until transit       :  5.26
+Planet/Star area ratio   :  0.011
+count                    :  13
+Description              :  This hot Jupiter has been discovered by the WASP transit survey and confirmed by radial velocity measurements. It is one of the most irradiated planets known. The host star is evolved and has a post main sequence radius.
+------------------
+file name                :  WASP-77.xml
+countTransit             :  0
+intRevolutionCount       :  2986
+System name              :  WASP-77
+Planet name              :  WASP-77 A b
+Planet period            :  1.4
+System Right Ascension   :   02 28 37
+System Declination       :  -07 03 38
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-17T16:02:56.031 PT
+Azimuth                  :  107.99
+Altitude                 :  12.77
+Days until transit       :  1.00
+Planet/Star area ratio   :  0.012
+count                    :  14
+Description              :  WASP-77 A b is a transiting Hot Jupiter (a planet similar to Jupiter but with an orbit much closer to the host star). It is orbiting a moderately bright G8 V star which is part of a visual binary. The binary has a separation of 3 arcseconds.
+------------------
+file name                :  WASP-77.xml
+countTransit             :  1
+intRevolutionCount       :  2987
+System name              :  WASP-77
+Planet name              :  WASP-77 A b
+Planet period            :  1.4
+System Right Ascension   :   02 28 37
+System Declination       :  -07 03 38
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-19T00:41:22.701 PT
+Azimuth                  :  247.24
+Altitude                 :  18.41
+Days until transit       :  2.36
+Planet/Star area ratio   :  0.012
+count                    :  15
+Description              :  WASP-77 A b is a transiting Hot Jupiter (a planet similar to Jupiter but with an orbit much closer to the host star). It is orbiting a moderately bright G8 V star which is part of a visual binary. The binary has a separation of 3 arcseconds.
+------------------
+file name                :  WASP-77.xml
+countTransit             :  3
+intRevolutionCount       :  2989
+System name              :  WASP-77
+Planet name              :  WASP-77 A b
+Planet period            :  1.4
+System Right Ascension   :   02 28 37
+System Declination       :  -07 03 38
+System Magnitude         :  10.3
+observingNextTransitTime :  2022-12-21T17:58:16.041 PT
+Azimuth                  :  133.44
+Altitude                 :  36.00
+Days until transit       :  5.08
+Planet/Star area ratio   :  0.012
+count                    :  16
+Description              :  WASP-77 A b is a transiting Hot Jupiter (a planet similar to Jupiter but with an orbit much closer to the host star). It is orbiting a moderately bright G8 V star which is part of a visual binary. The binary has a separation of 3 arcseconds.
+------------------
+file name                :  WASP-79.xml
+countTransit             :  0
+intRevolutionCount       :  996
+System name              :  WASP-79
+Planet name              :  WASP-79 b
+Planet period            :  3.7
+System Right Ascension   :   04 25 29.0168
+System Declination       :  -30 36 01.6109
+System Magnitude         :  10.1
+observingNextTransitTime :  2022-12-18T22:25:14.696 PT
+Azimuth                  :  178.60
+Altitude                 :  24.61
+Days until transit       :  2.27
+Planet/Star area ratio   :  0.011
+count                    :  17
+Description              :  WASP-79b is a highly bloated Jupiter-mass exoplanet. It is orbiting an F-type star and was discovered and analyzed using WASP, TRAPPIST and CORALIE data. WASP-79b is about twice as big as Jupiter, but its mass is smaller than that of Jupiter.
+------------------
+file name                :  WASP-8.xml
+countTransit             :  0
+intRevolutionCount       :  644
+System name              :  WASP-8
+Planet name              :  WASP-8 b
+Planet period            :  8.2
+System Right Ascension   :   23 59 36.0711
+System Declination       :  -35 01 52.920
+System Magnitude         :  9.9
+observingNextTransitTime :  2022-12-19T17:15:08.006 PT
+Azimuth                  :  169.74
+Altitude                 :  19.41
+Days until transit       :  3.05
+Planet/Star area ratio   :  0.012
+count                    :  18
+Description              :  None
