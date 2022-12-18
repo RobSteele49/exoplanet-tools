@@ -61,14 +61,14 @@ dateTimeUTC = datetime.utcnow()
 
 # This will search for 4 days (timedelta(4))
 
-startTime = Time(datetime.now(),              scale='utc')
-endTime   = Time(datetime.now()+timedelta(4), scale='utc')
+# startTime = Time(datetime.now(),              scale='utc')
+# endTime   = Time(datetime.now()+timedelta(4), scale='utc')
 
 # Overwritting the start and end times with hard wired number is done
 # below. This logic can be commented out when unnecessary.
 
-startTime = Time(datetime(2023,1,1,0,0,0), scale='utc')
-endTime   = Time(datetime(2023,1,5,0,0,0), scale='utc')
+startTime = Time(datetime(2022,12,17,0,0,0), scale='utc')
+endTime   = Time(datetime(2022,12,23,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
 print ('endTime      : ', endTime)
@@ -374,9 +374,6 @@ for file in os.listdir('xml_files'):
 # Debugging:
                                 print ('countTransit             : ', countTransit)
                                 print ('intRevolutionCount       : ', intRevolutionCount)
-                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
-                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
-                                print ('withinTimeRange          : ', withinTimeRange)
 # End of debugging print statements
 
                                 print ('System name              : ',  \
