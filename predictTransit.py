@@ -67,8 +67,8 @@ dateTimeUTC = datetime.utcnow()
 # Overwritting the start and end times with hard wired number is done
 # below. This logic can be commented out when unnecessary.
 
-startTime = Time(datetime(2022,12,17,0,0,0), scale='utc')
-endTime   = Time(datetime(2022,12,23,0,0,0), scale='utc')
+startTime = Time(datetime(2022,12,23,0,0,0), scale='utc')
+endTime   = Time(datetime(2022,12,28,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
 print ('endTime      : ', endTime)
@@ -376,11 +376,14 @@ for file in os.listdir('xml_files'):
                                 print ('intRevolutionCount       : ', intRevolutionCount)
 # End of debugging print statements
 
-                                print ('System name              : ',  \
-                                       root.findtext('name'))
+                                namesOfStar = star.findall("name")
+                                for x in range(len(namesOfStar)):
+                                    print ('Star name ', x+1, '            : ', namesOfStar[x].text)
 
-                                print ('Planet name              : ',  \
-                                       planet.findtext('name'))
+                                namesOfPlanet = planet.findall("name")
+
+                                for x in range(len(namesOfPlanet)):
+                                    print ('Planet name ', x+1, '          : ', namesOfPlanet[x].text)
 
                                 print ('Planet period            : ',  \
                                        "{:.1f}".format(float(planet.findtext('period'))))
@@ -414,4 +417,5 @@ for file in os.listdir('xml_files'):
 
                                 print ('Description              : ',  \
                                        planet.findtext('description'))
+
 
