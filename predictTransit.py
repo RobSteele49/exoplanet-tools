@@ -67,8 +67,8 @@ dateTimeUTC = datetime.utcnow()
 # Overwritting the start and end times with hard wired number is done
 # below. This logic can be commented out when unnecessary.
 
-startTime = Time(datetime(2022,12,23,0,0,0), scale='utc')
-endTime   = Time(datetime(2022,12,28,0,0,0), scale='utc')
+startTime = Time(datetime(2023,10,16,0,0,0), scale='utc')
+endTime   = Time(datetime(2023,10,17,0,0,0), scale='utc')
 
 print ('startTime    : ', startTime)
 print ('endTime      : ', endTime)
