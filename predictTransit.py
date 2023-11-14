@@ -8,10 +8,7 @@
 # program and put that logic in the 'updateXmlFiles.py' program.
 
 from astropy import units as u
-
-import astropy.time
 from astropy.time import Time
-from astropy.time import TimeDelta
 
 from astropy.coordinates import EarthLocation,SkyCoord
 from astropy.coordinates import AltAz
@@ -26,19 +23,15 @@ from astropy.coordinates import AltAz
 # Start of the rest of my old code, that worked when online
 
 import cmath
-import subprocess
-
-from datetime import timedelta
-from datetime import date
 from datetime import datetime
-
 import fnmatch
-
 import os
-
-import time
-
 import xml.etree.ElementTree as ET
+
+# 11/2/23 Added the function covert_to_utc which lives in the file time_converter.py
+# This code was written by chatGPT.
+
+from time_converter import convert_to_utc  # Import the function from your module
 
 # As of 2018-08-29 the variable 'fileList' is NOT used in the program.
 
@@ -49,29 +42,38 @@ fileList = (os.listdir('xml_files'))
 
 count = 0
 
-# Set up by grabbing the current date and then using the Time object
-# from astropy.time
-
 dateTime = datetime.today()
 nowPT    = Time (dateTime, scale='utc')
 
 print ('nowPT        : ', nowPT, 'PT')
-
+print ('nowPT.jd     : ', nowPT.jd )
 dateTimeUTC = datetime.utcnow()
 
 # This will search for 4 days (timedelta(4))
 
-# startTime = Time(datetime.now(),              scale='utc')
-# endTime   = Time(datetime.now()+timedelta(4), scale='utc')
+# Set start and end time. Doing this from the command line would be
+# a good idea. For now, I just modify the file.
 
-# Overwritting the start and end times with hard wired number is done
-# below. This logic can be commented out when unnecessary.
+startTimePDT = datetime(2023, 11, 14, 6, 0, 0)  # Local time, adjust as needed
+timezone_str = 'America/Los_Angeles'  # Example timezone (Eastern Time Zone)
 
-startTime = Time(datetime(2023,10,16,0,0,0), scale='utc')
-endTime   = Time(datetime(2023,10,17,0,0,0), scale='utc')
+startTimeUTC = convert_to_utc(startTimePDT, timezone_str)
 
-print ('startTime    : ', startTime)
-print ('endTime      : ', endTime)
+print (type(startTimeUTC))
+print ('type of startTimeUTC', type(startTimeUTC))
+
+endTimePDT = datetime(2023, 11, 16, 0, 0, 0)  # Local time, adjust as needed
+endTimeUTC = convert_to_utc(endTimePDT, timezone_str)
+
+# Debug print statements
+
+print ('startTimeUTC    : ', startTimeUTC)
+print ('endTimeUTC      : ', endTimeUTC)
+print ('startTimeUTC.jd : ', startTimeUTC.jd)
+print ('endTimeUTC.jd   : ', endTimeUTC.jd)
+
+# Setting the morning and evening times - assuming local time but they may in fact be in UT
+# These times do need to be adjusted to UTC as that is how everthing is calculated
 
 observingMorningTime = '06'
 observingEveningTime = '16'
@@ -82,9 +84,9 @@ minMagCutoff           = 10.75
 minAltCutoff           = 10.0
 minPlanetStarAreaRatio = 0.01
 
-#minMagCutoff           = input ('Enter minimum magnitude  : ')
-#minAltCutoff           = input ('Enter minimum altitude   : ')
-#minPlanetStarAreaRatio = input ('Enter minimum area ratio : ')
+# minMagCutoff           = input ('Enter minimum magnitude  : ')
+# minAltCutoff           = input ('Enter minimum altitude   : ')
+# minPlanetStarAreaRatio = input ('Enter minimum area ratio : ')
 
 # This reads into 'file' all of the files in the xml_files directory
 
@@ -96,11 +98,14 @@ for file in os.listdir('xml_files'):
 # are xml files
 
 # This if statement may not in fact be necessary. Need to confirm this.
+# Since all of the files in the directory xml_files are guarenteed to have
+# the extension .xml this check below is unnecessary and if I move sufficient code
+# into functions I will try and optimize this a little.
 
     if fnmatch.fnmatch(file, '*.xml'):
         
         tree = ET.parse ('xml_files/'+file)
-        root = tree.getroot();
+        root = tree.getroot()
 
 # Look for a star field in the xml - if there isn't raise an exception. This
 # exception is not having in the current set of xml files.
@@ -152,6 +157,9 @@ for file in os.listdir('xml_files'):
                                         if star.findtext('magK') != None:
                                             mag = star.findtext('magK')
                                         else:
+#                                            print ('Did not find a magnitude in the xml file')
+#                                            print ('Is transiting ?: ', planet.findtext('istransiting'))
+#                                            print ('xml file: ', file)
                                             mag = 20.0
 
 # End of magnitude check, use a magnitude of 20 if there isn't anything in
@@ -169,15 +177,21 @@ for file in os.listdir('xml_files'):
                     if planet.findtext('transittime') != None:
 
                         firstTimeInCountTransit = True;
+
+# why is the maxCountTransit set to 801?
+
                         maxCountTransit = 801
                         for countTransit in range(maxCountTransit):
                             
 # These two times, transitTimeBJD and transitTime are identical times.
 # Need to pick out just one for the code.
 
-                            transitTimeBJD = float(
+# The transit time in the .xml file has the units of BJD. I'm not sure how to
+# check this field to make sure I'm getting the time correct.
+
+                            transitTime = float(
                                 planet.findtext('transittime'))
-                            transitTime = Time(transitTimeBJD,
+                            transitTimeBJD = Time(transitTime,
                                                format = 'jd',
                                                scale='utc')
 
@@ -185,16 +199,20 @@ for file in os.listdir('xml_files'):
 # the range of time specified in the time range.
 # It seems like this should be the start of the time range.
 
-                            delta  = startTime.jd - transitTimeBJD;
+# Trying to eliminate the use of transitTime and replacing with transitTimeBJD.jd
 
-                            revolutionCount = delta / planetPeriod
+                            deltaDays  = startTimeUTC.jd - transitTimeBJD.jd;
+
+#                           print ('type of startTimeUTC.jd : ', type(startTimeUTC.jd))
+                            revolutionCount = deltaDays / planetPeriod
 
 # Add the number of countTransit to the intRevolutionCount. This starts at 0
 # and keeps incrementing until timeLessThanEnd becomes false. Until I come up
-# with something better when this event is detected I'll set countTransit to 100.
+# with something better when this event is detected I'll set countTransit
+# to 100.
 
                             intRevolutionCount = int(revolutionCount) + 1 + countTransit
-
+                            
                             nextTransit = transitTimeBJD + \
                                 (intRevolutionCount * planetPeriod)
 
@@ -202,11 +220,12 @@ for file in os.listdir('xml_files'):
                                                     format ='jd',
                                                     scale = 'utc');
 
-                            daysToTransit = nextTransit - startTime.jd
+                            daysToTransit = nextTransit - startTimeUTC.jd
 
 #
 # Change the time to PT by subtracting 8 hours (7 during DTS) from the UTC time
-#
+# nextTransit time 'should' be in UTC and this is converted to PT via a subtraction.
+# Look into doing this via a function.
 
                             nextTransitTimePT = nextTransit - (1.0/24.0*8.0)
                             nTTPT = Time (nextTransitTimePT,
@@ -247,23 +266,23 @@ for file in os.listdir('xml_files'):
                             else:
                                 planetStarAreaRatio = 0
                             
-                            a = nextTransitTimePT
+                            a = nextTransitTimePT.jd
                             b = nowPT.jd + 1
                             c = a < b
 
 # Look at the start and end times of the transitting period.
 
-                            if nTTPT.jd > startTime.jd:
-                                timeGreaterThanStartTime = True
+                            if nTTPT.jd > startTimeUTC.jd:
+                                timeGreaterThanstartTimeUTC = True
                             else:
-                                timeGreaterThanStartTime = False
+                                timeGreaterThanstartTimeUTC = False
 
 # Look for the end time to be exceeded. If it has break out of the loop.
 
-                            if nTTPT.jd < endTime.jd:
-                                timeLessThanEndTime = True
+                            if nTTPT.jd < endTimeUTC.jd:
+                                timeLessThanendTimeUTC = True
                             else:
-                                timeLessThanEndTime = False
+                                timeLessThanendTimeUTC = False
                                 break
 
 # This 'if' statement is looking for the condition where the maxCount was not set
@@ -274,7 +293,7 @@ for file in os.listdir('xml_files'):
                                 print ('Count transit = (maxCountTransit-1)')
                                 print ('countTransit : ', countTransit)
                                 
-                            if timeGreaterThanStartTime & timeLessThanEndTime:
+                            if timeGreaterThanstartTimeUTC & timeLessThanendTimeUTC:
                                 withinTimeRange = True
                             else:
                                 withinTimeRange = False
@@ -332,25 +351,25 @@ for file in os.listdir('xml_files'):
 # Debugging:
 #                            if root.findtext('name') == 'HD 56414':
 #                                print ('******* DEBUGGING *******')
-#                                print ('countTransit             : ', countTransit)
-#                                print ('revolutionCount          : ', revolutionCount)
-#                                print ('intRevolutionCount       : ', intRevolutionCount)
-#                                print ('delta                    : ', delta)
-#                                print ('startTime                : ', startTime)
-#                                print ('startTime.jd             : ', startTime.jd)
-#                                print ('startTime.fits           : ', startTime.fits)
-#                                print ('transitTimeBJD           : ', transitTimeBJD)
-#                                print ('nextTransitTime          : ', nextTransitTime)
-#                                print ('daysToTransit            : ', daysToTransit)
-#                                print ('nTTPT                    : ', nTTPT.fits)
-#                                print ('Period                   : ', planet.findtext('period'))
-#                                print ('Is transiting?           : ',
+#                                print ('countTransit                : ', countTransit)
+#                                print ('revolutionCount             : ', revolutionCount)
+#                                print ('intRevolutionCount          : ', intRevolutionCount)
+#                                print ('deltaDays                   : ', deltaDays)
+#                                print ('startTimeUTC                : ', startTimeUTC)
+#                                print ('startTimeUTC.jd             : ', startTimeUTC.jd)
+#                                print ('startTimeUTC.fits           : ', startTimeUTC.fits)
+#                                print ('transitTimeBJD              : ', transitTimeBJD)
+#                                print ('nextTransitTime             : ', nextTransitTime)
+#                                print ('daysToTransit               : ', daysToTransit)
+#                                print ('nTTPT                       : ', nTTPT.fits)
+#                                print ('Period                      : ', planet.findtext('period'))
+#                                print ('Is transiting?              : ',
 #                                       planet.findtext('istransiting'))
-#                                print ('timeGreaterThanStartTime : ', timeGreaterThanStartTime)
-#                                print ('timeLessThanEndTime      : ', timeLessThanEndTime)
-#                                print ('withinTimeRange          : ', withinTimeRange)
-#                                print ('planetStarAreaRatio      : ', planetStarAreaRatio)
-#                                print ('altitude                 : ', altAzi.alt.degree)
+#                                print ('timeGreaterThanstartTimeUTC : ', timeGreaterThanstartTimeUTC)
+#                                print ('timeLessThanendTimeUTC      : ', timeLessThanendTimeUTC)
+#                                print ('withinTimeRange             : ', withinTimeRange)
+#                                print ('planetStarAreaRatio         : ', planetStarAreaRatio)
+#                                print ('altitude                    : ', altAzi.alt.degree)
 #                                print ('******* DEBUGGING *******')
 # Debugging
 
@@ -386,7 +405,10 @@ for file in os.listdir('xml_files'):
                                     print ('Planet name ', x+1, '          : ', namesOfPlanet[x].text)
 
                                 print ('Planet period            : ',  \
-                                       "{:.1f}".format(float(planet.findtext('period'))))
+                                       "{:.4f}".format(float(planet.findtext('period'))))
+                                
+                                print ('transitTimeBJD           : ', transitTimeBJD)
+                                print ('transitTimeBJD.datetime  : ', transitTimeBJD.to_datetime())
 
                                 print ('System Right Ascension   :  ', \
                                        root.findtext('rightascension'))
@@ -407,7 +429,7 @@ for file in os.listdir('xml_files'):
                                        "{:.2f}".format(altAzi.alt.degree))
 
                                 print ('Days until transit       : ',  \
-                                       "{:.2f}".format(daysToTransit))
+                                       "{:.2f}".format(daysToTransit.jd))
                             
                                 print ('Planet/Star area ratio   : ',  \
                                        "{:.3f}".format(planetStarAreaRatio))

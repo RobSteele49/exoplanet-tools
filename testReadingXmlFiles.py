@@ -1,5 +1,8 @@
 # Written by Rob Steele
 
+# This program was to just test reading xml files and their respective field
+# for the transit prediction program.
+
 # The goal of this program is to scan all of the trasiting exoplanets
 # and search for ones that are visible during the night times hours
 # from my location.
@@ -40,7 +43,10 @@ import time
 
 import xml.etree.ElementTree as ET
 
-        
+listOfXmlFiles = os.listdir('xml_files')
+lengthOfArray  = listOfXmlFiles.__len__()
+tree = ET.parse ('xml_files/' + listOfXmlFiles[3000])
+
 tree = ET.parse ('xml_files/HAT-P-1.xml')
 root = tree.getroot();
 
@@ -54,11 +60,13 @@ namesOfStar = star.findall("name")
 for x in range(len(namesOfStar)):
     print ('Star name ', x+1, ' : ', namesOfStar[x].text)
 
-print ('new stuff')
-
 planet = star.findall('.//planet')
 namesOfPlanet = planet[0].findall("name")
 
 for x in range(len(namesOfPlanet)):
     print ('Planet name ', x+1, ' : ', namesOfPlanet[x].text)
+
+transitTime = planet[0].findtext('transittime')
+
+print ('transitTime: ', transitTime)
 

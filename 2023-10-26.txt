@@ -1,0 +1,93 @@
+nowPT        :  2023-10-26 08:10:47.884331 PT
+startTime    :  2023-10-26 16:00:00
+endTime      :  2023-10-29 00:00:00
+Hardwire minMagCutoff, minAltCutoff, and minPlanetStarAreaRatio to 10.0 0.0 0.01
+------------------
+file name                :  HAT-P-1.xml
+countTransit             :  0
+intRevolutionCount       :  1317
+Star name  1             :  HAT-P-1
+Star name  2             :  Gaia DR2 1928431764627661440
+Planet name  1           :  HAT-P-1 b
+Planet name  2           :  BD+37 4734s b
+Planet name  3           :  SAO 72884 b
+Planet name  4           :  Gaia DR2 1928431764627661440 b
+Planet period            :  4.5
+System Right Ascension   :   22 57 46.8443
+System Declination       :  +38 40 30.3553
+System Magnitude         :  10.4
+observingNextTransitTime :  2023-10-26T22:43:40.898 PT
+Azimuth                  :  290.97
+Altitude                 :  75.46
+Days until transit       :  0.57
+Planet/Star area ratio   :  0.012
+count                    :  1
+Description              :  None
+------------------
+file name                :  KELT-23.xml
+countTransit             :  0
+intRevolutionCount       :  992
+Star name  1             :  KELT-23 A
+Star name  2             :  BD+66 911
+Star name  3             :  2MASS J15283520+6621314
+Star name  4             :  TYC 4187-996-1
+Star name  5             :  UCAC4 782-024743
+Planet name  1           :  KELT-23 A b
+Planet name  2           :  BD+66 911 A b
+Planet name  3           :  2MASS J15283520+6621314 A b
+Planet name  4           :  TYC 4187-996-1 A b
+Planet name  5           :  UCAC4 782-024743 A b
+Planet period            :  2.3
+System Right Ascension   :   15 28 35.193
+System Declination       :  +66 21 31.54
+System Magnitude         :  10.3
+observingNextTransitTime :  2023-10-26T17:40:53.069 PT
+Azimuth                  :  332.14
+Altitude                 :  45.76
+Days until transit       :  0.36
+Planet/Star area ratio   :  0.018
+count                    :  2
+Description              :  This is a hot Jupiter orbiting a Near-Solar twin system.
+------------------
+file name                :  KELT-23.xml
+countTransit             :  1
+intRevolutionCount       :  993
+Star name  1             :  KELT-23 A
+Star name  2             :  BD+66 911
+Star name  3             :  2MASS J15283520+6621314
+Star name  4             :  TYC 4187-996-1
+Star name  5             :  UCAC4 782-024743
+Planet name  1           :  KELT-23 A b
+Planet name  2           :  BD+66 911 A b
+Planet name  3           :  2MASS J15283520+6621314 A b
+Planet name  4           :  TYC 4187-996-1 A b
+Planet name  5           :  UCAC4 782-024743 A b
+Planet period            :  2.3
+System Right Ascension   :   15 28 35.193
+System Declination       :  +66 21 31.54
+System Magnitude         :  10.3
+observingNextTransitTime :  2023-10-28T23:48:26.755 PT
+Azimuth                  :  347.39
+Altitude                 :  14.00
+Days until transit       :  2.62
+Planet/Star area ratio   :  0.018
+count                    :  3
+Description              :  This is a hot Jupiter orbiting a Near-Solar twin system.
+------------------
+file name                :  WASP-77.xml
+countTransit             :  1
+intRevolutionCount       :  3217
+Star name  1             :  WASP-77 A
+Planet name  1           :  WASP-77 A b
+Planet name  2           :  1SWASP J022837.22-070338.4 b
+Planet period            :  1.4
+System Right Ascension   :   02 28 37
+System Declination       :  -07 03 38
+System Magnitude         :  10.3
+observingNextTransitTime :  2023-10-27T21:03:36.746 PT
+Azimuth                  :  114.47
+Altitude                 :  20.28
+Days until transit       :  1.50
+Planet/Star area ratio   :  0.012
+count                    :  4
+Description              :  WASP-77 A b is a transiting Hot Jupiter (a planet similar to Jupiter but with an orbit much closer to the host star). It is orbiting a moderately bright G8 V star which is part of a visual binary. The binary has a separation of 3 arcseconds.
