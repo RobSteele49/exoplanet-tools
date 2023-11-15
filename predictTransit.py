@@ -28,10 +28,10 @@ import fnmatch
 import os
 import xml.etree.ElementTree as ET
 
-# 11/2/23 Added the function covert_to_utc which lives in the file time_converter.py
+# 11/2/23 Added the function covertToUtc which lives in the file timeConverter.py
 # This code was written by chatGPT.
 
-from time_converter import convert_to_utc  # Import the function from your module
+from timeConverter import convertToUtc  # Import the function from your module
 
 # As of 2018-08-29 the variable 'fileList' is NOT used in the program.
 
@@ -57,13 +57,13 @@ dateTimeUTC = datetime.utcnow()
 startTimePDT = datetime(2023, 11, 14, 6, 0, 0)  # Local time, adjust as needed
 timezone_str = 'America/Los_Angeles'  # Example timezone (Eastern Time Zone)
 
-startTimeUTC = convert_to_utc(startTimePDT, timezone_str)
+startTimeUTC = convertToUtc(startTimePDT, timezone_str)
 
 print (type(startTimeUTC))
 print ('type of startTimeUTC', type(startTimeUTC))
 
 endTimePDT = datetime(2023, 11, 16, 0, 0, 0)  # Local time, adjust as needed
-endTimeUTC = convert_to_utc(endTimePDT, timezone_str)
+endTimeUTC = convertToUtc(endTimePDT, timezone_str)
 
 # Debug print statements
 
