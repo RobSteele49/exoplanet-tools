@@ -17,8 +17,8 @@ from astropy.coordinates import AltAz
 # Need to look into determining how to detect when I"m offline and only use
 # this logic under those conditions.
 
-# from astropy.utils.iers import conf
-# conf.auto_max_age = None
+from astropy.utils.iers import conf
+conf.auto_max_age = None
 
 # Start of the rest of my old code, that worked when online
 
@@ -54,15 +54,12 @@ dateTimeUTC = datetime.utcnow()
 # Set start and end time. Doing this from the command line would be
 # a good idea. For now, I just modify the file.
 
-startTimePDT = datetime(2023, 11, 14, 6, 0, 0)  # Local time, adjust as needed
+startTimePDT = datetime(2024, 9, 6, 0, 0, 0)  # Local time, adjust as needed
 timezone_str = 'America/Los_Angeles'  # Example timezone (Eastern Time Zone)
 
 startTimeUTC = convertToUtc(startTimePDT, timezone_str)
 
-print (type(startTimeUTC))
-print ('type of startTimeUTC', type(startTimeUTC))
-
-endTimePDT = datetime(2023, 11, 16, 0, 0, 0)  # Local time, adjust as needed
+endTimePDT = datetime(2025, 9, 6, 0, 0, 0)  # Local time, adjust as needed
 endTimeUTC = convertToUtc(endTimePDT, timezone_str)
 
 # Debug print statements
@@ -215,6 +212,9 @@ for file in os.listdir('xml_files'):
                             
                             nextTransit = transitTimeBJD + \
                                 (intRevolutionCount * planetPeriod)
+
+                            x = Time.__add__(transitTimeBJD,\
+                                (intRevolutionCount * planetPeriod))
 
                             nextTransitTime = Time (nextTransit,
                                                     format ='jd',
