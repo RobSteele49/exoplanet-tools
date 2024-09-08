@@ -47,30 +47,70 @@ import xml.etree.ElementTree as ET
 # The other side benefit was that I could remove xml files that were
 # causing my program to crash.
 
-subprocess.getstatusoutput ('del xml_files/*')
-subprocess.getstatusoutput ('mkdir xml_files')
+x = subprocess.getstatusoutput ('rm -rf xml_files')
+print (x)
+
+x = subprocess.getstatusoutput ('mkdir xml_files')
+print (x)
+
+x = subprocess.getstatusoutput ('touch xml_files/x.xml')
+print (x)
 
 # The creation of software links was not working for me.
 
-subprocess.getstatusoutput ('cd xml_files')
-subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*        .')
-subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*y .')
-subprocess.getstatusoutput ('cd ..')
+x = subprocess.getstatusoutput ('pwd')
+print (x)
 
-subprocess.getstatusoutput ('del "xml_files/CFBDSIR2149.xml"')
-subprocess.getstatusoutput ('del "xml_files/EPIC 201637175.xml"')
-subprocess.getstatusoutput ('del "xml_files/KIC 12557548.xml"')
-subprocess.getstatusoutput ('del "xml_files/SDSS J1110+0116.xml"')
-subprocess.getstatusoutput ('del "xml_files/PSO J318?5-22.xml"')
-subprocess.getstatusoutput ('del "xml_files/SIMP0136+0933.xml"')
-subprocess.getstatusoutput ('del "xml_files/CFBDSIR2149.xml"')
-subprocess.getstatusoutput ('del "xml_files/WISE 0855-0714.xml"')
-subprocess.getstatusoutput ('del "xml_files/EPIC 204129699.xml"')
-subprocess.getstatusoutput ('del "xml_files/KOI-2700.xml"')
-subprocess.getstatusoutput ('del "xml_files/PSO J318.5-22.xml"')
-subprocess.getstatusoutput ('del "xml_files/SDSS J1110+0116.xml"')
-subprocess.getstatusoutput ('del "xml_files/SIMP0136+0933.xml"')
-subprocess.getstatusoutput ('del "xml_files/WISE 0855-0714.xml"')
+x = subprocess.getstatusoutput ('cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*.xml        xml_files/. ')
+print (x)
+
+x = subprocess.getstatusoutput ('cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*.xml xml_files/. ')
+print (x)
+
+x = subprocess.getstatusoutput ('cd ..')
+
+x = subprocess.getstatusoutput ("rm 'xml_files/CFBDSIR2149.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/EPIC 201637175.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/KIC 12557548.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/SDSS J1110+0116.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/PSO J318?5-22.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/SIMP0136+0933.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/CFBDSIR2149.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/WISE 0855-0714.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/EPIC 204129699.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/KOI-2700.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/PSO J318.5-22.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/SDSS J1110+0116.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/SIMP0136+0933.xml'")
+print (x)
+
+x = subprocess.getstatusoutput ("rm 'xml_files/WISE 0855-0714.xml'")
+print (x)
+
 
 
 
