@@ -4,30 +4,9 @@
 # 'predictTransit.py' program since there really isn't a need to update
 # the xml files every time I run the predictTransit program.
 
-#sep from astropy import units as u
-
-#sep import astropy.time
-#sep from astropy.time import Time
-#sep from astropy.time import TimeDelta
-
-#sep from astropy.coordinates import EarthLocation,SkyCoord
-#sep from astropy.coordinates import AltAz
-
-#sep import cmath
-
 import subprocess
-
-#sep from datetime import timedelta
-#sep from datetime import date
-#sep from datetime import datetime
-
-import fnmatch
-
 import os
-
-#sep import time
-
-import xml.etree.ElementTree as ET
+import platform
 
 # This section of code creates a directory 'xml_files' and then creates
 # softlinks to the xml files. in the open_exoplanet_catalogue in the
@@ -48,80 +27,49 @@ import xml.etree.ElementTree as ET
 # The other side benefit was that I could remove xml files that were
 # causing my program to crash.
 
-x = subprocess.getstatusoutput ('rm -rf xml_files')
-print (x)
+if platform.system() == 'Linux':
+    print("Running on Linux 1")
+    subprocess.getstatusoutput ('del xml_files/*')
+    subprocess.getstatusoutput ('mkdir xml_files')
+    # Do something specific for Linux
+elif platform.system() == 'Windows':
+    print("Running on Windows 1")
+    # Do something specific for Windows
+    subprocess.getstatusoutput ('rmdir xml_files')
+    subprocess.getstatusoutput ('mkdir xml_files')
 
-x = subprocess.getstatusoutput ('mkdir xml_files')
-print (x)
+if platform.system() == 'Linux':
+    print("Running on Linux 2")
+elif platform.system() == 'Windows':
+    print("Running on Windows 2") 
+    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems\*.xml xml_files\ '
+    subprocess.getstatusoutput (copyCommand)
+    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems_kepler\*.xml xml_files\ '
+    subprocess.getstatusoutput (copyCommand)
 
-x = subprocess.getstatusoutput ('touch xml_files/x.xml')
-print (x)
-
-# The creation of software links was not working for me.
-
-<<<<<<< HEAD
-subprocess.getstatusoutput ('cd xml_files')
-
-# was copy change to cp
-
-subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*        .')
-subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*y .')
-subprocess.getstatusoutput ('cd ..')
-=======
-x = subprocess.getstatusoutput ('pwd')
-print (x)
-
-x = subprocess.getstatusoutput ('cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*.xml        xml_files/. ')
-print (x)
-
-x = subprocess.getstatusoutput ('cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*.xml xml_files/. ')
-print (x)
-
-x = subprocess.getstatusoutput ('cd ..')
-
-x = subprocess.getstatusoutput ("rm 'xml_files/CFBDSIR2149.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/EPIC 201637175.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/KIC 12557548.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/SDSS J1110+0116.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/PSO J318?5-22.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/SIMP0136+0933.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/CFBDSIR2149.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/WISE 0855-0714.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/EPIC 204129699.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/KOI-2700.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/PSO J318.5-22.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/SDSS J1110+0116.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/SIMP0136+0933.xml'")
-print (x)
-
-x = subprocess.getstatusoutput ("rm 'xml_files/WISE 0855-0714.xml'")
-print (x)
->>>>>>> 4aa4b4ad24fc194be9489dcef40570f6112f09b5
-
+if platform.system() == 'Linux':
+    print("Running on Linux 3")
+    subprocess.getstatusoutput ('rm xml_files/EPIC?201637175.xml')
+    subprocess.getstatusoutput ('rm xml_files/KIC?12557548.xml')
+    subprocess.getstatusoutput ('rm xml_files/SDSS?J1110+0116.xml')
+    subprocess.getstatusoutput ('rm xml_files/PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('rm xml_files/SIMP0136+0933.xml')
+    subprocess.getstatusoutput ('rm xml_files/CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('rm xml_files/WISE?0855-0714.xml')
+    subprocess.getstatusoutput ('rm xml_files/EPIC?204129699.xml')
+    # Do something specific for Linux
+elif platform.system() == 'Windows':
+    print("Running on Windows 3")
+    subprocess.getstatusoutput ('del xml_files/CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\EPIC?201637175.xml')
+    subprocess.getstatusoutput ('del xml_files\KIC?12557548.xml')
+    subprocess.getstatusoutput ('del xml_files\SDSS?J1110+0116.xml')
+    subprocess.getstatusoutput ('del xml_files\PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('del xml_files\SIMP0136+0933.xml')
+    subprocess.getstatusoutput ('del xml_files\CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\WISE?0855-0714.xml')
+    subprocess.getstatusoutput ('del xml_files\EPIC?204129699.xml')
+    subprocess.getstatusoutput ('del xml_files/KOI-2700.xml')
 
 
 
