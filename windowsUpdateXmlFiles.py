@@ -6,6 +6,7 @@
 
 import subprocess
 import os
+import platform
 
 # This section of code creates a directory 'xml_files' and then creates
 # softlinks to the xml files. in the open_exoplanet_catalogue in the
@@ -26,29 +27,51 @@ import os
 # The other side benefit was that I could remove xml files that were
 # causing my program to crash.
 
-subprocess.getstatusoutput ('rmdir xml_files')
-subprocess.getstatusoutput ('mkdir xml_files')
+if platform.system() == 'Linux':
+    print("Running on Linux 1")
+    subprocess.getstatusoutput ('del xml_files/*')
+    subprocess.getstatusoutput ('mkdir xml_files')
+    # Do something specific for Linux
+elif platform.system() == 'Windows':
+    print("Running on Windows 1")
+    # Do something specific for Windows
+    subprocess.getstatusoutput ('rmdir xml_files')
+    subprocess.getstatusoutput ('mkdir xml_files')
 
-systemFileList = (os.listdir('../open_exoplanet_catalogue/systems'))
-
-for file in systemFileList:
-    copyCommand = "cp ../open_exoplanet_catalogue/systems/'" + file + "' xml_files/"
-    #print (copyCommand)
+if platform.system() == 'Linux':
+    print("Running on Linux 2")
+elif platform.system() == 'Windows':
+    print("Running on Windows 2") 
+    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems\*.xml xml_files\ '
+    subprocess.getstatusoutput (copyCommand)
+    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems_kepler\*.xml xml_files\ '
     subprocess.getstatusoutput (copyCommand)
 
-systemKeplerFileList = (os.listdir('../open_exoplanet_catalogue/systems_kepler'))
+if platform.system() == 'Linux':
+    print("Running on Linux 3")
+    subprocess.getstatusoutput ('rm xml_files/EPIC?201637175.xml')
+    subprocess.getstatusoutput ('rm xml_files/KIC?12557548.xml')
+    subprocess.getstatusoutput ('rm xml_files/SDSS?J1110+0116.xml')
+    subprocess.getstatusoutput ('rm xml_files/PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('rm xml_files/SIMP0136+0933.xml')
+    subprocess.getstatusoutput ('rm xml_files/CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('rm xml_files/WISE?0855-0714.xml')
+    subprocess.getstatusoutput ('rm xml_files/EPIC?204129699.xml')
+    # Do something specific for Linux
+elif platform.system() == 'Windows':
+    print("Running on Windows 3")
+    subprocess.getstatusoutput ('del xml_files/CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\EPIC?201637175.xml')
+    subprocess.getstatusoutput ('del xml_files\KIC?12557548.xml')
+    subprocess.getstatusoutput ('del xml_files\SDSS?J1110+0116.xml')
+    subprocess.getstatusoutput ('del xml_files\PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('del xml_files\SIMP0136+0933.xml')
+    subprocess.getstatusoutput ('del xml_files\CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\WISE?0855-0714.xml')
+    subprocess.getstatusoutput ('del xml_files\EPIC?204129699.xml')
+    subprocess.getstatusoutput ('del xml_files/KOI-2700.xml')
 
-for file in systemKeplerFileList:
-    copyCommand = "cp ../open_exoplanet_catalogue/systems_kepler/'" + file + "' xml_files/"
-    #print (copyCommand)
-    subprocess.getstatusoutput (copyCommand)
 
-subprocess.getstatusoutput ('rm xml_files/EPIC?201637175.xml')
-subprocess.getstatusoutput ('rm xml_files/KIC?12557548.xml')
-subprocess.getstatusoutput ('rm xml_files/SDSS?J1110+0116.xml')
-subprocess.getstatusoutput ('rm xml_files/PSO?J318?5-22.xml')
-subprocess.getstatusoutput ('rm xml_files/SIMP0136+0933.xml')
-subprocess.getstatusoutput ('rm xml_files/CFBDSIR2149.xml')
-subprocess.getstatusoutput ('rm xml_files/WISE?0855-0714.xml')
-subprocess.getstatusoutput ('rm xml_files/EPIC?204129699.xml')
+
+
 

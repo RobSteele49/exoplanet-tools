@@ -14,6 +14,7 @@
 #sep from astropy.coordinates import AltAz
 
 #sep import cmath
+
 import subprocess
 
 #sep from datetime import timedelta
@@ -53,6 +54,9 @@ subprocess.getstatusoutput ('mkdir xml_files')
 # The creation of software links was not working for me.
 
 subprocess.getstatusoutput ('cd xml_files')
+
+# was copy change to cp
+
 subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*        .')
 subprocess.getstatusoutput ('copy ../../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*y .')
 subprocess.getstatusoutput ('cd ..')
