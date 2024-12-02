@@ -64,7 +64,7 @@ elif platform.system() == 'Windows':
     subprocess.getstatusoutput ('del xml_files\\EPIC?201637175.xml')
     subprocess.getstatusoutput ('del xml_files\\KIC?12557548.xml')
     subprocess.getstatusoutput ('del xml_files\\SDSS?J1110+0116.xml')
-    subprocess.getstatusoutput ('del xml_files\\PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('del xml_files\\PSO*J318*5*22.xml')
     subprocess.getstatusoutput ('del xml_files\\SIMP0136+0933.xml')
     subprocess.getstatusoutput ('del xml_files\\CFBDSIR2149.xml')
     subprocess.getstatusoutput ('del xml_files\\WISE?0855-0714.xml')
