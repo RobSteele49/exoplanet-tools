@@ -42,9 +42,9 @@ if platform.system() == 'Linux':
     print("Running on Linux 2")
 elif platform.system() == 'Windows':
     print("Running on Windows 2") 
-    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems\*.xml xml_files\ '
+    copyCommand = 'copy ..\\OpenExoplanetCatalogue\\open_exoplanet_catalogue\\systems\\*.xml xml_files\\ '
     subprocess.getstatusoutput (copyCommand)
-    copyCommand = 'copy ..\OpenExoplanetCatalogue\open_exoplanet_catalogue\systems_kepler\*.xml xml_files\ '
+    copyCommand = 'copy ..\\OpenExoplanetCatalogue\\open_exoplanet_catalogue\\systems_kepler\\*.xml xml_files\\ '
     subprocess.getstatusoutput (copyCommand)
 
 if platform.system() == 'Linux':
@@ -60,16 +60,16 @@ if platform.system() == 'Linux':
     # Do something specific for Linux
 elif platform.system() == 'Windows':
     print("Running on Windows 3")
-    subprocess.getstatusoutput ('del xml_files/CFBDSIR2149.xml')
-    subprocess.getstatusoutput ('del xml_files\EPIC?201637175.xml')
-    subprocess.getstatusoutput ('del xml_files\KIC?12557548.xml')
-    subprocess.getstatusoutput ('del xml_files\SDSS?J1110+0116.xml')
-    subprocess.getstatusoutput ('del xml_files\PSO?J318?5-22.xml')
-    subprocess.getstatusoutput ('del xml_files\SIMP0136+0933.xml')
-    subprocess.getstatusoutput ('del xml_files\CFBDSIR2149.xml')
-    subprocess.getstatusoutput ('del xml_files\WISE?0855-0714.xml')
-    subprocess.getstatusoutput ('del xml_files\EPIC?204129699.xml')
-    subprocess.getstatusoutput ('del xml_files/KOI-2700.xml')
+    subprocess.getstatusoutput ('del xml_files\\CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\\EPIC?201637175.xml')
+    subprocess.getstatusoutput ('del xml_files\\KIC?12557548.xml')
+    subprocess.getstatusoutput ('del xml_files\\SDSS?J1110+0116.xml')
+    subprocess.getstatusoutput ('del xml_files\\PSO?J318?5-22.xml')
+    subprocess.getstatusoutput ('del xml_files\\SIMP0136+0933.xml')
+    subprocess.getstatusoutput ('del xml_files\\CFBDSIR2149.xml')
+    subprocess.getstatusoutput ('del xml_files\\WISE?0855-0714.xml')
+    subprocess.getstatusoutput ('del xml_files\\EPIC?204129699.xml')
+    subprocess.getstatusoutput ('del xml_files\\KOI-2700.xml')
 
 
 
