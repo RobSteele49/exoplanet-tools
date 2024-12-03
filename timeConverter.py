@@ -30,3 +30,8 @@ def convertFromUtc(localTime, timeZoneString):
     TimeInAstropy = Time(TimeUtc)
 
     return TimeInAstropy
+
+def newConvertFromUtc (localTime, timeZoneString):
+    
+    timezone = pytz.timezone(timezone_string) local_datetime = utc_datetime.replace(tzinfo=pytz.utc).astimezone(timezone) return local_datetime
+
