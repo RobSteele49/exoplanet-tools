@@ -40,6 +40,10 @@ elif platform.system() == 'Windows':
 
 if platform.system() == 'Linux':
     print("Running on Linux 2")
+    copyCommand = 'cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*.xml xml_files/'
+    subprocess.getstatusoutput (copyCommand)
+    copyCommand = 'cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*.xml xml_files/'
+    subprocess.getstatusoutput (copyCommand)
 elif platform.system() == 'Windows':
     print("Running on Windows 2") 
     copyCommand = 'copy ..\\OpenExoplanetCatalogue\\open_exoplanet_catalogue\\systems\\*.xml xml_files\\ '
