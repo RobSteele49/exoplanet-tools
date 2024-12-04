@@ -31,7 +31,27 @@ def convertFromUtc(localTime, timeZoneString):
 
     return TimeInAstropy
 
-def newConvertFromUtc (localTime, timeZoneString):
-    
-    timezone = pytz.timezone(timezone_string) local_datetime = utc_datetime.replace(tzinfo=pytz.utc).astimezone(timezone) return local_datetime
+if __name__ == '__main__':
 
+    from datetime import datetime
+
+    print ('inside of __main__')
+
+    # Example usage
+    timeInLocalZone = datetime(2023, 10, 30, 0, 0, 0)  # Local time, adjust as needed
+    print (timeInLocalZone)
+    timeZoneString = 'America/New_York'  # Example timezone (Eastern Time Zone)
+
+    timeInUtcZone = convertToUtc(timeInLocalZone, timeZoneString)
+    print(timeInUtcZone)
+
+    timeZoneString = 'America/Los_Angeles'
+
+    timeInUtcZone = convertToUtc(timeInLocalZone, timeZoneString)
+    print(timeInUtcZone)
+
+    timeInUtcZone = datetime(2023,10, 30, 0, 0, 0)
+    timeInLocalZone = convertFromUtc (timeInUtcZone, timeZoneString)
+    print ('time in local Zone')
+    print (timeInLocalZone)
+    
