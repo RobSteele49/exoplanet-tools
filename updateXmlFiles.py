@@ -28,31 +28,33 @@ import platform
 # causing my program to crash.
 
 if platform.system() == 'Linux':
-    print("Running on Linux 1")
+    print ('Running on Linux')
+elif platform.system() == 'Windows':
+    print ('Running on Windows')
+else:
+    print ('Could not ID what system this is running on')
+
+if platform.system() == 'Linux':
     subprocess.getstatusoutput ('del xml_files/*')
     subprocess.getstatusoutput ('mkdir xml_files')
     # Do something specific for Linux
 elif platform.system() == 'Windows':
-    print("Running on Windows 1")
     # Do something specific for Windows
     subprocess.getstatusoutput ('rmdir xml_files')
     subprocess.getstatusoutput ('mkdir xml_files')
 
 if platform.system() == 'Linux':
-    print("Running on Linux 2")
     copyCommand = 'cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems/*.xml xml_files/'
     subprocess.getstatusoutput (copyCommand)
     copyCommand = 'cp ../OpenExoplanetCatalogue/open_exoplanet_catalogue/systems_kepler/*.xml xml_files/'
     subprocess.getstatusoutput (copyCommand)
 elif platform.system() == 'Windows':
-    print("Running on Windows 2") 
     copyCommand = 'copy ..\\OpenExoplanetCatalogue\\open_exoplanet_catalogue\\systems\\*.xml xml_files\\ '
     subprocess.getstatusoutput (copyCommand)
     copyCommand = 'copy ..\\OpenExoplanetCatalogue\\open_exoplanet_catalogue\\systems_kepler\\*.xml xml_files\\ '
     subprocess.getstatusoutput (copyCommand)
 
 if platform.system() == 'Linux':
-    print("Running on Linux 3")
     subprocess.getstatusoutput ('rm xml_files/EPIC?201637175.xml')
     subprocess.getstatusoutput ('rm xml_files/KIC?12557548.xml')
     subprocess.getstatusoutput ('rm xml_files/SDSS?J1110+0116.xml')
@@ -63,7 +65,6 @@ if platform.system() == 'Linux':
     subprocess.getstatusoutput ('rm xml_files/EPIC?204129699.xml')
     # Do something specific for Linux
 elif platform.system() == 'Windows':
-    print("Running on Windows 3")
     subprocess.getstatusoutput ('del xml_files\\CFBDSIR2149.xml')
     subprocess.getstatusoutput ('del xml_files\\EPIC?201637175.xml')
     subprocess.getstatusoutput ('del xml_files\\KIC?12557548.xml')
