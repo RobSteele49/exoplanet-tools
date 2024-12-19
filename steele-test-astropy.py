@@ -11,7 +11,7 @@ from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 # print m33
 
 m33 = SkyCoord ('1h12m43.2s 33d30m30s', frame='icrs');
-print 'm33: ' , m33
+print ('m33: ' , m33)
 
 bear_mountain = EarthLocation(lat=41.3*u.deg, lon=-74*u.deg, height=390*u.m)
 utcoffset = -4*u.hour  # Eastern Daylight Time
