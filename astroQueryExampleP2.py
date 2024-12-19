@@ -19,6 +19,8 @@ cata = oec.get_catalogue()
 
 #star = tree.find("star")
 
+# not sure if the oec. function is findall, findvalue, or whatever.
+
 for planet in oec.findall(".//planet"):
     print (findvalue (planet, 'name'))
            

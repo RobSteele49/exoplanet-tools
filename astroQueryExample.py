@@ -17,8 +17,9 @@ from astroquery.open_exoplanet_catalogue import findvalue
 
 cata = oec.get_catalogue()
 
-star = tree.find(".//star")
+# tree was not defined in this code:
+# star = tree.find(".//star")
 
-for planet in oec.findall(".//planet"):
+for planet in oec.findvalue(".//planet"):
     print (findvalue (planet, 'name'))
            
