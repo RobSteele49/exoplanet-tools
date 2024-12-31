@@ -406,9 +406,14 @@ for file in os.listdir('xml_files'):
                                 for x in range(len(namesOfPlanet)):
                                     print ('Planet name ', x+1, '          : ', namesOfPlanet[x].text)
 
-                                print ('Planet period            : ',  \
+# Print the period in days, extract and covert to hours as well as days
+
+                                print ('Planet period (hours)    : ', \
                                        "{:.4f}".format(float(planet.findtext('period'))))
-                                
+                                periodInHours = float(planet.findtext('period')) * 24.0
+                                print ('Planet period (minutes)  : ', \
+                                       "{:.4f}".format(periodInHours))
+
                                 print ('transitTimeBJD           : ', transitTimeBJD)
                                 print ('transitTimeBJD.datetime  : ', transitTimeBJD.to_datetime())
 
