@@ -20,6 +20,8 @@ cata = oec.get_catalogue()
 # tree was not defined in this code:
 # star = tree.find(".//star")
 
+# As of 2024 Dec 19 the findvalue function was not working
+
 for planet in oec.findvalue(".//planet"):
     print (findvalue (planet, 'name'))
            

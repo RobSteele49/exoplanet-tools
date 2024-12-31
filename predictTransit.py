@@ -1,3 +1,5 @@
+# predictTransit.py
+
 # Written by Rob Steele
 
 # The goal of this program is to scan all of the trasiting exoplanets
@@ -54,12 +56,12 @@ dateTimeUTC = datetime.utcnow()
 # Set start and end time. Doing this from the command line would be
 # a good idea. For now, I just modify the file.
 
-startTimePDT = datetime(2024, 12, 1, 0, 0, 0)  # Local time, adjust as needed
+startTimePDT = datetime(2024, 12, 19, 0, 0, 0)  # Local time, adjust as needed
 timezone_str = 'America/Los_Angeles'  # Example timezone (Eastern Time Zone)
 
 startTimeUTC = convertToUtc(startTimePDT, timezone_str)
 
-endTimePDT = datetime(2024, 12, 10, 0, 0, 0)  # Local time, adjust as needed
+endTimePDT = datetime(2024, 12, 25, 0, 0, 0)  # Local time, adjust as needed
 endTimeUTC = convertToUtc(endTimePDT, timezone_str)
 
 # Debug print statements
